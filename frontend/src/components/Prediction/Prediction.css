@@ -1,0 +1,54 @@
+
+.prediction {
+   display: flex;
+   flex-direction: column;
+   font-size: 16px;
+   margin-top: 50px;
+   margin-bottom: 50px;
+   gap: 20px;
+}
+
+.prediction h1 {
+   font-weight: 500;
+   color: #262626;
+}
+
+.prediction h3 {
+   font-weight: 400;
+   color: #ff0000;
+}
+
+.formcss {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 20px;
+   align-items: center;
+   width: 100%;
+   margin: 0 auto;
+}
+
+.formcss input, .formcss select {
+   padding: 10px;
+}
+ 
+.formside {
+   display: flex;
+   flex-direction: column;
+}
+ 
+.add-btn {
+   grid-column: span 2;
+   padding: 10px 20px;
+   margin-top: 20px;
+   margin-bottom: 30px;
+   background-color: #000;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+}
+ 
+.prediction-result {
+   grid-column: span 2;
+   font-size: 1.5rem;
+}
+ 
