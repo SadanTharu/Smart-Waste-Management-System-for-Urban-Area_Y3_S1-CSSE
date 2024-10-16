@@ -1,0 +1,127 @@
+.add {
+   width: 70%;
+   margin-left: max(5vw, 25px);
+   margin-top: 50px;
+   color: #6d6d6d;
+   font-size: 16px;
+}
+
+.add form {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.add-image-upload img {
+   width: 120px;
+}
+
+/* Product name, description, and treatment sections */
+.add-product-name,
+.add-product-description,
+.add-treatment {
+   width: max(40%, 280px);
+}
+
+.add-product-name input,
+.add-product-description textarea,
+.add-treatment select {
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 16px;
+   color: #333;
+}
+
+.add-product-name input::placeholder,
+.add-product-description textarea::placeholder,
+.add-treatment select {
+   color: #aaa;
+}
+
+/* Dropdown menu styling */
+.add-category-price select,
+.add-price select {
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   font-size: 16px;
+   background-color: #f9f9f9;
+   color: #333;
+   max-width: 200px;
+   transition: all 0.3s ease;
+}
+
+.add-category-price select:focus,
+.add-price select:focus {
+   outline: none;
+   border-color: #595c59; /* Updated green color */
+   background-color: #fff;
+}
+
+.add-price select option {
+   font-size: 14px;
+}
+
+/* Recommended Treatment text in red */
+.add-price p {
+   color: red;
+}
+
+/* Severity level slider styling */
+.add-severity .slider {
+   width: 100%;
+   margin-top: 10px;
+   -webkit-appearance: none;
+   appearance: none;
+   height: 8px;
+   background: #ddd;
+   border-radius: 5px;
+   outline: none;
+   transition: background 0.3s ease;
+}
+
+.add-severity .slider::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   appearance: none;
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background: #595c59; /* Updated green color */
+   cursor: pointer;
+   transition: background 0.3s ease;
+}
+
+.add-severity .slider::-moz-range-thumb {
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background: #595c59; /* Updated green color */
+   cursor: pointer;
+}
+
+.add-severity .slider:active::-webkit-slider-thumb {
+   background: #595c59; /* Darker shade of green */
+}
+
+.add-severity span {
+   font-size: 18px;
+   margin-top: 5px;
+   color: #333;
+}
+
+/* Submit button */
+.add-btn {
+   max-width: 120px;
+   border: none;
+   padding: 10px;
+   background-color: #595c59; /* Updated green color */
+   color: white;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.add-btn:hover {
+   background-color: #595c59; /* Darker shade of green */
+}

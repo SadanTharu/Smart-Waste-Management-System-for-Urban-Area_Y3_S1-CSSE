@@ -1,0 +1,202 @@
+/* RemedyDetail.css */
+
+.remedy-detail-card {
+    width: 90%;
+    max-width: 800px;
+    margin-left: 310px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.remedy-detail-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loading-container, .error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f5f5f5;
+}
+
+.loading-spinner {
+    color: #1877f2; /* Facebook blue */
+}
+
+.error-container {
+    text-align: center;
+}
+
+.remedy-detail-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #28a745;
+    .remedy-list-container {
+    padding: 20px;
+}
+
+.search-bar-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 600px;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.remedy-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.remedy-list-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.remedy-list-item:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.remedy-list-image-container {
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.remedy-list-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.remedy-list-no-image {
+    width: 80px;
+    height: 80px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.remedy-list-info {
+    flex-grow: 1;
+}
+
+.remedy-list-title {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.remedy-list-text {
+    color: #555;
+}
+
+.remedy-list-action {
+    margin-left: auto;
+}
+
+.remedy-list-button {
+    text-transform: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    padding: 6px 12px;
+    transition: background-color 0.3s ease;
+}
+
+.remedy-list-button:hover {
+    background-color: #0056b3;
+}
+
+    margin-bottom: 16px;
+}
+
+.remedy-detail-subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    color: #666;
+    margin-top: 24px;
+}
+
+.remedy-detail-text {
+    font-size: 16px;
+    color: #444;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+.remedy-detail-button {
+    margin-top: 16px;
+    background: #28a745;
+    color: #ffffff;
+    text-transform: uppercase;
+    border-radius: 24px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.remedy-detail-button:hover {
+    background: #218838;
+    transform: scale(1.05); /* Slightly enlarges button on hover */
+}
+
+@media (max-width: 768px) {
+    .remedy-detail-card {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .remedy-detail-image {
+        height: 200px; /* Adjusted for better mobile view */
+    }
+
+    .remedy-detail-title {
+        font-size: 20px;
+    }
+
+    .remedy-detail-subtitle {
+        font-size: 16px;
+        margin-top: 16px;
+    }
+
+    .remedy-detail-text {
+        font-size: 14px;
+    }
+
+    .remedy-detail-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
