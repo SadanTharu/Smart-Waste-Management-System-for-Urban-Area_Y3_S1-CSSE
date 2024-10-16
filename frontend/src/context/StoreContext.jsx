@@ -5,23 +5,23 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const url = "http://localhost:4000";
-  const [disease_list, setDiseaseList] = useState([]);
+  const [location_list, setLocationList] = useState([]);
 
-  const fetchDiseaseList = async () => {
+  const fetchLocationList = async () => {
     try {
-      const response = await axios.get(url + "/api/disease/list");
-      setDiseaseList(response.data.data); // Corrected function usage here
+      const response = await axios.get(url + "/api/location/list");
+      setLocationList(response.data.data); // Corrected function usage here
     } catch (error) {
       console.error("Failed to fetch disease list:", error);
     }
   };
 
   useEffect(() => {
-    fetchDiseaseList();
+    fetchLocationList();
   }, []);
 
   const contextValue = {
-    disease_list,
+    location_list,
     url,
   };
 

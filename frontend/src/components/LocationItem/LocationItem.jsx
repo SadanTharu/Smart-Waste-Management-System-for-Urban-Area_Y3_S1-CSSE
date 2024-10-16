@@ -1,9 +1,16 @@
 import React, { useContext } from "react";
-import "./DiseaseItem.css";
+import "./LocationItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 
-const LocationItem = ({ id, address, openTime, wasteType, image }) => {
+const LocationItem = ({
+  id,
+  locationName,
+  address,
+  wasteType,
+  openTime,
+  image,
+}) => {
   const { url } = useContext(StoreContext);
 
   return (

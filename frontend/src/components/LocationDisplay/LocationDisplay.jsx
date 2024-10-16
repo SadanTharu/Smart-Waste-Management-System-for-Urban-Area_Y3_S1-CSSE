@@ -1,25 +1,26 @@
 import React, { useContext } from "react";
-import "./DeseaseDisplay.css";
+import "./LocationDisplay.css";
 import { StoreContext } from "../../context/StoreContext";
-import DiseaseItem from "../DiseaseItem/DiseaseItem";
+import LocationItem from "../LocationItem/LocationItem";
 
-const DiseaseDisplay = ({ category }) => {
-  const { disease_list } = useContext(StoreContext);
+const LocationDisplay = ({ category }) => {
+  const { location_list } = useContext(StoreContext);
 
   return (
     <div className="food-display" id="diseases-display">
       <h1>Currently available information...</h1>
       <p>“contact us +94740956299”</p>
       <div className="food-display-list">
-        {disease_list.map((item) => {
+        {location_list.map((item) => {
           if (category === "All" || category === item.category) {
             return (
-              <DiseaseItem
+              <LocationItem
                 key={item._id}
                 id={item._id}
-                diseaseName={item.diseaseName}
-                symptoms={item.symptoms}
-                severityLevel={item.severityLevel}
+                locationName={item.locationName}
+                wasteType={item.wasteType}
+                openTime={item.openTime}
+                address={item.address}
                 image={item.image}
               />
             );
@@ -31,4 +32,4 @@ const DiseaseDisplay = ({ category }) => {
   );
 };
 
-export default DiseaseDisplay;
+export default LocationDisplay;
