@@ -8,9 +8,9 @@ const AddLocation = ({ url }) => {
   const [image, setImage] = useState(null);
   const [data, setData] = useState({
     locationName: "",
-    description: "",
-    garbageType: "organic", // Default garbage type
-    collectionTime: "morning", // Default collection time
+    wasteType: "",
+    openTime: "morning", // Default garbage type
+    address: "", // Default collection time
   });
 
   const onChangeHandler = (event) => {
@@ -22,19 +22,21 @@ const AddLocation = ({ url }) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("locationName", data.locationName);
-    formData.append("description", data.description);
-    formData.append("garbageType", data.garbageType);
-    formData.append("collectionTime", data.collectionTime);
+    formData.append("wasteType", data.wasteType);
+    formData.append("openTime", data.openTime);
+    formData.append("address", data.address);
     formData.append("image", image);
+
+    //try catch block for eror handling in submitting
 
     try {
       const response = await axios.post(`${url}/api/location/add`, formData);
       if (response.data.success) {
         setData({
           locationName: "",
-          description: "",
-          garbageType: "organic",
-          collectionTime: "morning",
+          wasteType: "",
+          openTime: "morning",
+          address: "galle",
         });
         setImage(null);
         toast.success(response.data.message);
@@ -80,13 +82,13 @@ const AddLocation = ({ url }) => {
         </div>
 
         <div className="add-description flex-col">
-          <p>Location Description</p>
+          <p>Location address</p>
           <textarea
             onChange={onChangeHandler}
-            value={data.description}
-            name="description"
+            value={data.address}
+            name="address"
             rows="6"
-            placeholder="Describe the location"
+            placeholder="add the address"
             required
           />
         </div>
@@ -95,8 +97,8 @@ const AddLocation = ({ url }) => {
           <p>Type of Garbage</p>
           <select
             onChange={onChangeHandler}
-            name="garbageType"
-            value={data.garbageType}
+            name="wasteType"
+            value={data.wasteType}
             className="custom-select"
             required
           >
@@ -113,7 +115,7 @@ const AddLocation = ({ url }) => {
           <select
             onChange={onChangeHandler}
             name="collectionTime"
-            value={data.collectionTime}
+            value={data.openTime}
             className="custom-select"
             required
           >

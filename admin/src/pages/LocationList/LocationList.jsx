@@ -53,8 +53,8 @@ const LocationList = ({ url }) => {
         <div className="list-table-format title">
           <b>Image</b>
           <b>Location Name</b>
-          <b>Description</b>
-          <b>Garbage Type</b>
+          <b>address</b>
+          <b>wasteType</b>
           <b>Collection Time</b>
           <b>Update</b>
           <b>Delete</b>
@@ -67,9 +67,9 @@ const LocationList = ({ url }) => {
                 alt={item.locationName}
               />
               <p>{item.locationName}</p>
-              <p>{item.description}</p>
-              <p>{item.garbageType}</p>
-              <p>{item.collectionTime}</p>
+              <p>{item.address}</p>
+              <p>{item.wasteType}</p>
+              <p>{item.openTime}</p>
 
               <img
                 src={assets.update_icon}

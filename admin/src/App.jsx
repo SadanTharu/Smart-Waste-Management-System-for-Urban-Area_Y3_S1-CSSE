@@ -7,8 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/Dashboard";
 //import Disease from "./pages/Disease/Disease";
 
-import Remedies from "./pages/Treat/TreatmentDashboard";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

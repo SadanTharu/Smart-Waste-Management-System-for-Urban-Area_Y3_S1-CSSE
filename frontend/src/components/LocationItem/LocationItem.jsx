@@ -3,7 +3,7 @@ import "./DiseaseItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 
-const DiseaseItem = ({ id, diseaseName, severityLevel, symptoms, image }) => {
+const LocationItem = ({ id, address, openTime, wasteType, image }) => {
   const { url } = useContext(StoreContext);
 
   return (
@@ -12,21 +12,20 @@ const DiseaseItem = ({ id, diseaseName, severityLevel, symptoms, image }) => {
         <img
           className="disease-item-image"
           src={`${url}/images/${image}`}
-          alt={diseaseName}
+          alt={locationName}
         />
       </div>
       <div className="disease-item-info">
         <div className="disease-item-name-rating">
-          <p>{diseaseName}</p>
+          <p>{locationName}</p>
         </div>
-        <p className="disease-item-desc">{symptoms}</p>
-        <p className="disease-item-case-count">
-          {" "}
-          Severity Level: {severityLevel}{" "}
-        </p>
+        <p className="disease-item-desc">{address}</p>
+
+        <p className="disease-item-desc">{openTime}</p>
+        <p className="disease-item-case-count"> waste type: {wasteType} </p>
       </div>
     </div>
   );
 };
 
-export default DiseaseItem;
+export default LocationItem;
