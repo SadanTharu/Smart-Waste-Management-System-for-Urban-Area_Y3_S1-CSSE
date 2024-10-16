@@ -1,0 +1,164 @@
+
+/* Existing CSS */
+
+/* Form Container */
+.form-container {
+    max-width: 1000px; 
+    margin: 100px auto; 
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+.error-text {
+    color: red;
+    font-size: 14px;
+    background-color: #fdd;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid red;
+    margin-top: 5px;
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #28a745;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 30px;
+    width: 50vw; 
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Input and Textarea Styles */
+input[type="text"],
+input[type="url"],
+textarea {
+    width: 100%; 
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+/* Focus State */
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 250, 46, 0.1);
+}
+
+/* Textarea Specific */
+textarea {
+    resize: vertical; 
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Submit Button */
+.submit-button,
+.cancel-button {
+    width: 48%; 
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Submit Button Specific */
+.submit-button {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Submit Button Hover State */
+.submit-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Cancel Button Specific */
+.cancel-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Cancel Button Hover State */
+.cancel-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .form-group {
+        width: 100%;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .submit-button,
+    .cancel-button {
+        width: 100%; 
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 900px) {
+    input[type="text"],
+    input[type="url"],
+    textarea {
+        font-size: 14px; 
+    }
+
+    .submit-button,
+    .cancel-button {
+        font-size: 16px; 
+    }
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        padding: 15px; 
+    }
+
+    h2 {
+        font-size: 20px; 
+    }
+
+    input[type="text"],
+    input[type="url"],
+    textarea {
+        font-size: 14px;
+    }
+
+    .submit-button,
+    .cancel-button {
+        font-size: 14px; 
+    }
+}
+

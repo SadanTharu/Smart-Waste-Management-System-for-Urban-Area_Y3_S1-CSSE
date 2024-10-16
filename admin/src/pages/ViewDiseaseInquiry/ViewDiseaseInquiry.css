@@ -1,0 +1,73 @@
+.disease-in-view-inquiry-container {
+  margin: 20px;
+  font-family: Arial, sans-serif; /* Adding a font family for better readability */
+}
+
+.disease-in-search-bar {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+}
+
+.disease-in-search-bar input {
+  padding: 12px; /* Increased padding for better touch target */
+  border: 1px solid grey; /* Blue border */
+  border-radius: 4px;
+  width: 70%; /* Adjust width as needed */
+  margin-right: 10px; /* Space between input and button */
+  font-size: 16px; /* Increased font size for readability */
+}
+
+.disease-in-search-bar button {
+  padding: 12px 20px; /* Increased padding for better touch target */
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(30, 131, 30); /* Updated button color */
+  color: white;
+  font-size: 16px; /* Increased font size for readability */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover and active states */
+}
+
+.disease-in-search-bar button:hover {
+  background-color: #484c50; /* Darker shade on hover */
+}
+
+.disease-in-search-bar button:active {
+  transform: scale(0.95); /* Button shrink effect on click */
+}
+
+.disease-in-inquiry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four columns */
+  gap: 20px; /* Space between items */
+}
+
+.disease-in-inquiry-card {
+  border: 1px solid #ddd; /* Existing card border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px;
+  background-color: #e8f5e9; /* Very light green background */
+  transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+  border: 2px solid grey; /* New light green border */
+}
+
+.disease-in-inquiry-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+
+.disease-in-inquiry-image {
+  max-width: 100%; /* Responsive image */
+  border-radius: 4px; /* Rounded image corners */
+}
+
+.disease-in-inquiry-details h3 {
+  margin: 10px 0;
+}
+
+.disease-in-inquiry-details p {
+  margin-top: 10px;
+  margin: 5px 0;
+  line-height: 1.5; /* Spacing between lines */
+}

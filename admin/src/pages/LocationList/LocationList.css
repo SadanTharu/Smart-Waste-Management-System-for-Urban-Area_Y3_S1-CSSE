@@ -1,0 +1,53 @@
+.list-table-format {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr; /* Added an extra column for the X button */
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px; /* Fixed padding (use space instead of comma) */
+    border: 1px solid #cacaca;
+    font-size: 13px;
+}
+
+.list-table-format.title {
+    background-color: #f9f9f9;
+}
+
+.list-table-format img {
+    width: 50px;
+}
+
+@media (max-width: 600px) {
+    .list-table-format {
+        grid-template-columns: 1fr 3fr 1fr 0.5fr; /* Adjusted for smaller screens */
+        gap: 15px;
+    }
+    .list-table-format.title {
+        display: none;
+    }
+}
+
+.update-button {
+    background-color: rgb(141, 136, 136); /* Grey background */
+    color: white; /* Black text */
+    border: none; /* No border */
+    padding: 5px 15px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* No underline */
+    display: inline-block; /* Inline-block element */
+    font-size: 11px; /* Text size */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.2s ease; /* Smooth transition */
+}
+
+.update-button:hover {
+    background-color: #bbb; /* Darker grey on hover */
+}
+
+.delete-icon {
+    cursor: pointer; /* Pointer cursor on hover */
+    color: red; /* Optional: change color of the X icon */
+    font-weight: bold; /* Optional: make it bold */
+    text-align: center; /* Center the icon */
+    padding: 10px 10px;
+}
