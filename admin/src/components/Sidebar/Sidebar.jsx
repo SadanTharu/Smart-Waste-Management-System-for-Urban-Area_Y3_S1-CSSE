@@ -15,6 +15,11 @@ const Sidebar = () => {
           <img src={assets.disease_icon} alt="" />
           <p>Disease Management</p>
         </NavLink>
+        <NavLink to="/CollectionRecordDashboard" className="sidebar-option">
+          <img src={assets.disease_icon} alt="" />
+          <p>Waste Collection & Issues Management</p>
+        </NavLink>
+        
       </div>
     </div>
   );

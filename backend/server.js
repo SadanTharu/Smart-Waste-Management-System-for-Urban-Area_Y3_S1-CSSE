@@ -4,8 +4,11 @@ import { connectDB } from "./config/db.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import locationRouter from './routes/locationRouter.js';
+import CollectionRecordRoute from "./routes/Collectors/collectionRoutes.js";
+import Issuerouter from "./routes/Collectors/issueReportRoutes.js";
+import IssueForAdminrouter from "./routes/User/userRoutr.js";
 
-// App configurations
+
 const app = express()
 const port = 4000
 
@@ -26,6 +29,10 @@ connectDB();
 // API Endpoints
 app.use("/api/location", locationRouter)
 app.use("/images",express.static('uploads'))
+
+app.use('/api/collectionrecord', CollectionRecordRoute);
+app.use('/api/issue', Issuerouter);
+app.use('/api/IssueForAdminrouter', IssueForAdminrouter);
 
 
 app.get("/", (req, res) => {

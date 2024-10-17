@@ -1,0 +1,56 @@
+/* UserList.css */
+.user-list-container {
+    padding: 20px;
+    width: 50vw; 
+    margin: auto;
+    margin-top: 100px;
+}
+
+.user-cards-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; /
+}
+
+.user-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #f9f9f9; 
+    transition: box-shadow 0.3s; 
+}
+
+.user-card:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.view-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff6c11; 
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+}
+
+.view-button:hover {
+    background-color: #e65c0e;
+}
+
+.error-text {
+    color: red;
+}
+
+.search-container{
+    width: 30%;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}

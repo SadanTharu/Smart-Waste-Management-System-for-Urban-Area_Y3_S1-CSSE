@@ -19,20 +19,20 @@ const Navbar = () => {
         >
           Payments
         </Link>
-        <a
-          href="#prediction"
-          onClick={() => setMenu("prediction")}
-          className={menu === "prediction" ? "active" : ""}
+        <Link
+          to="/WasteHome"
+          onClick={() => setMenu("wastecollection")}
+          className={menu === "wastecollection" ? "active" : ""}
         >
           Waste collection
-        </a>
-        <a
-          href="#diseases"
-          onClick={() => setMenu("diseases")}
-          className={menu === "diseases" ? "active" : ""}
+        </Link>
+        <Link
+          to="/wastemanagement"
+          onClick={() => setMenu("wastemanagement")}
+          className={menu === "wastemanagement" ? "active" : ""}
         >
           Waste management
-        </a>
+        </Link>
       </ul>
       <div className="navbar-right">
         <button>Sign In</button>
@@ -40,5 +40,5 @@ const Navbar = () => {
     </div>
   );
 };
-
 export default Navbar;
+

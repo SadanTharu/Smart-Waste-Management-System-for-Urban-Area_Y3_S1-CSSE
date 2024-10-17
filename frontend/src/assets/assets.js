@@ -20,6 +20,9 @@ import profile_icon from './profile_icon.png';
 import bag_icon from './bag_icon.png';
 import logout_icon from './logout_icon.png';
 import parcel_icon from './parcel_icon.png';
+import wastecollectors from './wastecollectors.png';
+import bin from './bin.jpg';
+import issue from './issue.png';
 
 import menu_1 from './menu_1.jpeg';
 import menu_2 from './menu_2.jpeg';
@@ -48,6 +51,9 @@ export const assets = {
     logout_icon,
     bag_icon,
     parcel_icon,
+    wastecollectors,
+    bin,
+    issue,
 };
 
 export const disease_menu_list = [
