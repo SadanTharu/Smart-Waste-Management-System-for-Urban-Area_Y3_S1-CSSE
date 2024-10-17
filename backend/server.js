@@ -4,6 +4,7 @@ import { connectDB } from "./config/db.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import locationRouter from './routes/locationRouter.js';
+import collectionRouter from "./routes/collectionRequestRouter.js";
 
 // App configurations
 const app = express()
@@ -25,6 +26,8 @@ connectDB();
 
 // API Endpoints
 app.use("/api/location", locationRouter)
+app.use("/api/collection", collectionRouter)
+
 app.use("/images",express.static('uploads'))
 
 

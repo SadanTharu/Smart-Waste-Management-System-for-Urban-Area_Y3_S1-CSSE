@@ -5,6 +5,7 @@ import ExploreDeseases from "../../components/ExploreDeseases/ExploreDeseases";
 import { useState } from "react";
 import AppDownload from "../../components/AppDownload/AppDownload";
 import LocationDisplay from "../../components/LocationDisplay/LocationDisplay";
+import CollectionRequest from "../../components/collectionRequest/collectionRequest";
 
 const Home = () => {
   const [category, setCategory] = useState("All");
@@ -13,6 +14,7 @@ const Home = () => {
       <Header />
       <ExploreDeseases category={category} setCategory={setCategory} />
       <LocationDisplay category={category} />
+      <CollectionRequest />
       <AppDownload />
     </div>
   );
