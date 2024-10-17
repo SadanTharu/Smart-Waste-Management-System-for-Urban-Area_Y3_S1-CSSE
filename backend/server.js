@@ -4,6 +4,8 @@ import { connectDB } from "./config/db.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import locationRouter from './routes/locationRouter.js';
+import diseaseRouter from "./routes/bankDetailsRoute.js";
+import bankDetailsRouter from "./routes/bankDetailsRoute.js";
 
 // App configurations
 const app = express()
@@ -26,6 +28,8 @@ connectDB();
 // API Endpoints
 app.use("/api/location", locationRouter)
 app.use("/images",express.static('uploads'))
+app.use("/api/diseaseInquiry", diseaseRouter)
+app.use("/api/bankDetails",bankDetailsRouter)
 
 
 app.get("/", (req, res) => {
