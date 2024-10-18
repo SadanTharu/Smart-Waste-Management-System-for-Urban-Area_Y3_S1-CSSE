@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './DiseaseInquiry.css';
+import './MakePayment.css';
+import Stripe from 'stripe'
+
+
 
 const BankDetails = () => {
+  const [paymentMethod, setPaymentMethod] = useState('card'); // To store selected payment method
   const [formData, setFormData] = useState({
     residentID: '',
     residentName: '',
@@ -11,10 +14,14 @@ const BankDetails = () => {
     branch: '',
     amount: '',
     images: null,
+    cardNumber: '',
+    cardHolder: '',
+    expiryDate: '',
+    cvv: ''
   });
 
+
   const [notification, setNotification] = useState(null);
-//   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -41,118 +48,165 @@ const BankDetails = () => {
       });
 
       if (response.data.success) {
-        setNotification({ message: 'Bank Details Added Successfully', type: 'success' });
-        // Reset the form 
+        setNotification({ message: 'Payment Submitted Successfully', type: 'success' });
         setFormData({
-            residentID: '',
-            residentName: '',
-            bank: '',
-            branch: '',
-            amount: '',
-            images: null,
+          residentID: '',
+          residentName: '',
+          bank: '',
+          branch: '',
+          amount: '',
+          images: null,
+          cardNumber: '',
+          cardHolder: '',
+          expiryDate: '',
+          cvv: ''
         });
-
-        // // Navigate to viewDiseaseInquiry page
-        // navigate('/viewInquiry');
-
       } else {
-        setNotification({ message: 'Error adding Bank Details', type: 'error' });
+        setNotification({ message: 'Error submitting payment', type: 'error' });
       }
     } catch (error) {
-      setNotification({ message: 'Error adding Bank Details', type: 'error' });
+      setNotification({ message: 'Error submitting payment', type: 'error' });
     }
   };
 
-  // Handle form reset when the Cancel button is clicked
   const handleCancel = () => {
-    // Reset the form to its initial state
     setFormData({
-        residentID: '',
-        residentName: '',
-        bank: '',
-        branch: '',
-        amount: '',
-        images: null,
+      residentID: '',
+      residentName: '',
+      bank: '',
+      branch: '',
+      amount: '',
+      images: null,
+      cardNumber: '',
+      cardHolder: '',
+      expiryDate: '',
+      cvv: ''
     });
-
-    // Optionally, clear any notifications if necessary
     setNotification(null);
+    setPaymentMethod(''); // Reset payment method
   };
 
-  return (
-    <div className="form-container1">
-      {/* <InquiryHeader /> */}
-      <h2 className='header12'>Complete Payment</h2>
-      <form method="POST" onSubmit={handleSubmit}>
-        <table className='table-container1'>
-          <tbody>
-            <tr>
-              <td><label htmlFor="residentID">Resident ID:</label></td>
-              <td><input type="text" name="residentID" placeholder="Resident ID" value={formData.residentID} onChange={handleChange} required /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="residentName">Resident Name:</label></td>
-              <td><input type="text" name="residentName" placeholder="Resident Name" value={formData.emaresidentNameil} onChange={handleChange} required /></td>
-            </tr>
-            {/* <tr>
-              <td><label htmlFor="phone">Phone Number:</label></td>
-              <td><input type="text" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="inquiryDate">Inquiry Date:</label></td>
-              <td><input type="date" name="inquiryDate" placeholder="Inquiry Date" value={formData.inquiryDate} onChange={handleChange} required /></td>
-            </tr> */}
-            <tr>
-              <td><label htmlFor="bank">Bank:</label></td>
-              <td>
-                <select name="bank" value={formData.bank} onChange={handleChange} required>
-                  <option value="">Select Bank</option>
-                  <option value="Western">Western</option>
-                  <option value="Central">Central</option>
-                  <option value="Southern">Southern</option>
-                  <option value="Northern">Northern</option>
-                  <option value="Eastern">Eastern</option>
-                  <option value="North Western">North Western</option>
-                  <option value="North Central">North Central</option>
-                  <option value="Uva">Uva</option>
-                  <option value="Sabaragamuwa">Sabaragamuwa</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td><label htmlFor="branch">Branch:</label></td>
-              <td>
-                <select name="branch" value={formData.branch} onChange={handleChange} required>
-                  <option value="">Select Branch</option>
-                  <option value="Western">Western</option>
-                  <option value="Central">Central</option>
-                  <option value="Southern">Southern</option>
-                  <option value="Northern">Northern</option>
-                  <option value="Eastern">Eastern</option>
-                  <option value="North Western">North Western</option>
-                  <option value="North Central">North Central</option>
-                  <option value="Uva">Uva</option>
-                  <option value="Sabaragamuwa">Sabaragamuwa</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td><label htmlFor="amount">Amount:</label></td>
-              <td><input type="number" name="amount" placeholder="Amount" value={formData.amount} onChange={handleChange} required /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="images">Images:</label></td>
-              <td><input type="file" name="images" onChange={handleChange} accept="image/*" required /></td>
-            </tr>
-          </tbody>
-        </table>
-        <div className='button-container'>
-          <button className='btn-submit' type="submit">Submit </button>
 
-          <button className='btn-cancel' type="button" onClick={handleCancel}>Cancel</button>
-        </div>
-      </form>
-      {notification && <p className={`notification ${notification.type}`}>{notification.message}</p>}
+  
+
+  return (
+    <div className="payment-form-container">
+      <h2 className="payment-form-header">Select Payment Method</h2>
+      
+      <div className="payment-method-buttons">
+        <button className={`payment-method-btn ${paymentMethod === 'card' ? 'active' : ''}`} 
+          onClick={() => setPaymentMethod('card')}>
+          Card Payment
+        </button>
+        <button className={`payment-method-btn ${paymentMethod === 'bank' ? 'active' : ''}`} 
+          onClick={() => setPaymentMethod('bank')}>
+          Bank Transfer
+        </button>
+      </div>
+
+      {paymentMethod === 'bank' && (
+        <form method="POST" onSubmit={handleSubmit}>
+          <table className="payment-form-table">
+            <tbody>
+              <tr>
+                <td><label htmlFor="residentID" className="payment-form-label">Resident ID:</label></td>
+                <td><input type="text" name="residentID" className="payment-form-input" placeholder="Resident ID" value={formData.residentID} onChange={handleChange} required /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="residentName" className="payment-form-label">Resident Name:</label></td>
+                <td><input type="text" name="residentName" className="payment-form-input" placeholder="Resident Name" value={formData.residentName} onChange={handleChange} required /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="bank" className="payment-form-label">Bank:</label></td>
+                <td>
+                  <select name="bank" className="payment-form-select" value={formData.bank} onChange={handleChange} required>
+                    <option value="">Select Bank</option>
+                    <option value="Bank of Ceylon">Bank of Ceylon</option>
+                    <option value="People's Bank">People's Bank</option>
+                    <option value="Commercial Bank of Ceylon">Commercial Bank of Ceylon</option>
+                    <option value="Hatton National Bank">Hatton National Bank</option>
+                    <option value="Sampath Bank">Sampath Bank</option>
+                    <option value="Union Bank of Colombo">Union Bank of Colombo</option>
+                    <option value="DFCC Bank">DFCC Bank</option>
+                    <option value="National Development Bank">National Development Bank</option>
+                    <option value="Sri Lanka Savings Bank">Sri Lanka Savings Bank</option>
+                    <option value="Cargills Bank">Cargills Bank</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><label htmlFor="branch" className="payment-form-label">Branch:</label></td>
+                <td>
+                  <select name="branch" className="payment-form-select" value={formData.branch} onChange={handleChange} required>
+                    <option value="">Select Branch</option>
+                    <option value="Colombo Fort">Colombo Fort</option>
+                    <option value="Kotte">Kotte</option>
+                    <option value="Dehiwala">Dehiwala</option>
+                    <option value="Gampaha">Gampaha</option>
+                    <option value="Kandy">Kandy</option>
+                    <option value="Negombo">Negombo</option>
+                    <option value="Moratuwa">Moratuwa</option>
+                    <option value="Jaffna">Jaffna</option>
+                    <option value="Galle">Galle</option>
+                    <option value="Battaramulla">Battaramulla</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><label htmlFor="amount" className="payment-form-label">Amount:</label></td>
+                <td><input type="number" name="amount" className="payment-form-input" placeholder="Amount" value={formData.amount} onChange={handleChange} required /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="images" className="payment-form-label">Upload Receipt:</label></td>
+                <td><input type="file" name="images" className="payment-form-file-input" onChange={handleChange} accept="image/*" required /></td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="payment-form-button-container">
+            <button className="payment-form-btn-submit" type="submit">Submit</button>
+            <button className="payment-form-btn-cancel" type="button" onClick={handleCancel}>Cancel</button>
+          </div>
+        </form>
+      )}
+
+      {paymentMethod === 'card' && (
+        <form method="POST" onSubmit={handleSubmit}>
+          <table className="payment-form-table">
+            <tbody>
+              <tr>
+                <td><label htmlFor="residentID" className="payment-form-label">Resident ID:</label></td>
+                <td><input type="text" name="residentID" className="payment-form-input" placeholder="Resident ID" value={formData.residentID} onChange={handleChange} required /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="residentName" className="payment-form-label">Resident Name:</label></td>
+                <td><input type="text" name="residentName" className="payment-form-input" placeholder="Resident Name" value={formData.residentName} onChange={handleChange} required /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="cardNumber" className="payment-form-label">Card Number:</label></td>
+                <td><input type="text" name="cardNumber" className="payment-form-input" placeholder="Card Number" value={formData.cardNumber} onChange={handleChange} required /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="cardHolder" className="payment-form-label">Card Holder:</label></td>
+                <td><input type="text" name="cardHolder" className="payment-form-input" placeholder="Card Holder Name" value={formData.cardHolder} onChange={handleChange} required /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="expiryDate" className="payment-form-label">Expiry Date:</label></td>
+                <td><input type="text" name="expiryDate" className="payment-form-input" placeholder="MM/YY" value={formData.expiryDate} onChange={handleChange} required /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="cvv" className="payment-form-label">CVV:</label></td>
+                <td><input type="password" name="cvv" className="payment-form-input" placeholder="CVV" value={formData.cvv} onChange={handleChange} required /></td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="payment-form-button-container">
+            <button className="payment-form-btn-submit" type="submit">Submit</button>
+            <button className="payment-form-btn-cancel" type="button" onClick={handleCancel}>Cancel</button>
+          </div>
+        </form>
+      )}
+
+      {notification && <p className={`payment-form-notification ${notification.type}`}>{notification.message}</p>}
     </div>
   );
 };

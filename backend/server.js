@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import locationRouter from './routes/locationRouter.js';
 import diseaseRouter from "./routes/bankDetailsRoute.js";
 import bankDetailsRouter from "./routes/bankDetailsRoute.js";
+import paymentRouter from "./routes/paymentRoutes.js";
 
 // App configurations
 const app = express()
@@ -30,6 +31,7 @@ app.use("/api/location", locationRouter)
 app.use("/images",express.static('uploads'))
 app.use("/api/diseaseInquiry", diseaseRouter)
 app.use("/api/bankDetails",bankDetailsRouter)
+app.use("/api/payment", paymentRouter)
 
 
 app.get("/", (req, res) => {
