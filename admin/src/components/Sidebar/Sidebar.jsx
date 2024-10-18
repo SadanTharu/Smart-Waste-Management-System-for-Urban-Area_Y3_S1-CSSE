@@ -7,13 +7,13 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-options">
-        <NavLink to="/dashboard" className="sidebar-option">
-          <img src={assets.dashboard_icon} alt="" />
-          <p>Dashboard</p>
-        </NavLink>
-        <NavLink to="/location" className="sidebar-option">
+        <NavLink to="/addlocation" className="sidebar-option">
           <img src={assets.disease_icon} alt="" />
-          <p>Disease Management</p>
+          <p>add location</p>
+        </NavLink>
+        <NavLink to="/list" className="sidebar-option">
+          <img src={assets.disease_icon} alt="" />
+          <p>added location list</p>
         </NavLink>
         <NavLink to="/collection" className="sidebar-option">
           <img src={assets.disease_icon} alt="" />

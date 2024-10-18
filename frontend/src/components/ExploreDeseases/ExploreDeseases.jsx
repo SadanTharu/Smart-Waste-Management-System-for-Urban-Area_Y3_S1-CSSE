@@ -1,34 +1,33 @@
 import React from "react";
 import "./ExploreDeseases.css";
-import { disease_menu_list } from "../../assets/assets";
+import { location_menu_list } from "../../assets/assets";
 
 const ExploreDeseases = ({ category, setCategory }) => {
   return (
     <div className="explore-menu" id="diseases">
       <h1>View Collecting Places</h1>
       <p className="explore-menu-text">
-        These are the places where we collec garbage...
+        These are the places where we collect garbage...
       </p>
       <div className="explore-menu-list">
-        {disease_menu_list.map((item, index) => {
+        {location_menu_list.map((item, index) => {
           return (
             <div
               onClick={() =>
                 setCategory((prev) =>
-                  prev === item.disease_name ? "All" : item.disease_name
+                  prev === item.location_name ? "All" : item.location_name
                 )
               }
               key={index}
               className="explore-menu-list-item"
             >
               <img
-                className={category === item.disease_name ? "active" : ""}
-                src={item.disease_image}
+                className={category === item.location_name ? "active" : ""}
+                src={item.location_image}
                 alt=""
               />
-              <p>{item.disease_name}</p>
-              <span>{item.case_count} Disease</span>{" "}
-              {/* Displaying case count instead of price */}
+              <p>{item.location_name}</p>
+              <span>{item.case_count} Galle</span>{" "}
             </div>
           );
         })}

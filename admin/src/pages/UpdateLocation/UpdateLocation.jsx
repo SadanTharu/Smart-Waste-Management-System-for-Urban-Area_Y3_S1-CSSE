@@ -9,9 +9,9 @@ const UpdateLocation = ({ url = "http://localhost:4000" }) => {
   const navigate = useNavigate();
   const [locationData, setLocationData] = useState({
     locationName: "",
-    description: "",
-    garbageType: "organic",
-    collectionTime: "morning",
+    wasteType: "",
+    openTime: "morning",
+    address: "",
     image: null,
   });
 
@@ -28,17 +28,21 @@ const UpdateLocation = ({ url = "http://localhost:4000" }) => {
     e.preventDefault();
     const formData = new FormData();
 
+    // Update this section to check the correct property names
     if (locationData.locationName) {
       formData.append("locationName", locationData.locationName);
     }
-    if (locationData.description) {
-      formData.append("description", locationData.description);
+    if (locationData.wasteType) {
+      // Changed from description to wasteType
+      formData.append("wasteType", locationData.wasteType);
     }
-    if (locationData.garbageType) {
-      formData.append("garbageType", locationData.garbageType);
+    if (locationData.openTime) {
+      // Changed from garbageType to openTime
+      formData.append("openTime", locationData.openTime);
     }
-    if (locationData.collectionTime) {
-      formData.append("collectionTime", locationData.collectionTime);
+    if (locationData.address) {
+      // Changed from collectionTime to address
+      formData.append("address", locationData.address);
     }
     if (locationData.image) {
       formData.append("image", locationData.image);
@@ -55,7 +59,7 @@ const UpdateLocation = ({ url = "http://localhost:4000" }) => {
 
       if (response.data.success) {
         toast.success("Location updated successfully");
-        navigate("/locations");
+        navigate("/list");
       } else {
         toast.error("Error updating location");
       }
@@ -65,9 +69,9 @@ const UpdateLocation = ({ url = "http://localhost:4000" }) => {
   };
 
   return (
-    <div className="update-form">
-      <form className="flex-col" onSubmit={handleSubmit}>
-        <div className="update-form-field">
+    <div className="update-loc-form-container">
+      <form className="update-loc-form" onSubmit={handleSubmit}>
+        <div className="update-loc-field">
           <p>Location Name</p>
           <input
             type="text"
@@ -79,23 +83,23 @@ const UpdateLocation = ({ url = "http://localhost:4000" }) => {
           />
         </div>
 
-        <div className="update-form-field">
-          <p>Description</p>
+        <div className="update-loc-field">
+          <p>Address</p>
           <textarea
-            name="description"
+            name="address"
             rows="6"
-            value={locationData.description}
+            value={locationData.address}
             onChange={handleChange}
-            placeholder="Enter location description"
+            placeholder="Enter location address"
             required
           />
         </div>
 
-        <div className="update-form-field">
-          <p>Garbage Type</p>
+        <div className="update-loc-field">
+          <p>Waste Type</p>
           <select
-            name="garbageType"
-            value={locationData.garbageType}
+            name="wasteType"
+            value={locationData.wasteType}
             onChange={handleChange}
             required
           >
@@ -107,11 +111,11 @@ const UpdateLocation = ({ url = "http://localhost:4000" }) => {
           </select>
         </div>
 
-        <div className="update-form-field">
+        <div className="update-loc-field">
           <p>Garbage Collection Time</p>
           <select
-            name="collectionTime"
-            value={locationData.collectionTime}
+            name="openTime"
+            value={locationData.openTime}
             onChange={handleChange}
             required
           >
@@ -121,12 +125,12 @@ const UpdateLocation = ({ url = "http://localhost:4000" }) => {
           </select>
         </div>
 
-        <div className="update-form-field">
+        <div className="update-loc-field">
           <p>Upload New Image</p>
           <input type="file" name="image" onChange={handleChange} />
         </div>
 
-        <button type="submit" className="update-btn">
+        <button type="submit" className="update-loc-btn">
           Update Location
         </button>
       </form>

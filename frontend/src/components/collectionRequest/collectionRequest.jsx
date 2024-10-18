@@ -72,7 +72,7 @@ const AddCollection = () => {
 
   return (
     <div className="form-container">
-      <h2>Add Special Garbage Collection Request</h2>
+      <h2>Special Collection Request</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       {isSuccessPopupVisible && (

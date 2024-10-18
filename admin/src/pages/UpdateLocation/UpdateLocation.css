@@ -1,112 +1,95 @@
-.update-disease {
-   width: 70%;
-   margin-left: max(5vw, 25px);
-   margin-top: 50px;
-   color: #6d6d6d;
-   font-size: 16px;
-}
-
-.update-disease form {
-   display: flex;
-   flex-direction: column;
-   gap: 20px;
-}
-.update-disease h2{
-   color: rgb(101, 100, 100);
-}
-
-.update-disease input[type="text"],
-.update-disease input[type="number"],
-.update-disease input[type="file"],
-.update-disease button {
-   padding: 10px;
-   border-radius: 5px;
-   border: 1px solid #ddd;
-   font-size: 16px;
-}
-
-.update-disease input[type="file"] {
-   padding: 5px; /* Optional for file input */
-}
-
-.update-disease button {
-   max-width: 120px;
-   border: none;
-   background-color: rgb(101, 100, 100);
-   color: white;
-   cursor: pointer;
-   transition: background-color 0.3s;
-}
-
-.update-disease button:hover {
-   background-color: gray; /* Change button color on hover */
-}
-
-.update-disease p {
-   color: #666;
-}
-
-.update-disease .image-preview {
-   color: green;
-}
-
-/* Styles for the slider */
-.severity-slider {
-   -webkit-appearance: none;
-   width: 25%; /* Set the width to 25% */
-   height: 8px;
-   border-radius: 5px;
-   background: #ddd;
-   outline: none;
-   opacity: 0.7;
-   transition: opacity 0.2s;
-   margin: 10px 0; /* Optional: Adds some space above and below the slider */
-}
-
-.severity-slider::-webkit-slider-thumb {
-   -webkit-appearance: none;
-   appearance: none;
-   width: 25px;
-   height: 25px;
-   border-radius: 50%;
-   background: #6d6d6d;
-   cursor: pointer;
-}
-
-.severity-slider::-moz-range-thumb {
-   width: 25px;
-   height: 25px;
-   border-radius: 50%;
-   background: #4caf50;
-   cursor: pointer;
-}
-
-/* Styles for the select dropdown */
-.update-disease select {
-   padding: 10px;
-   border-radius: 5px;
-   border: 1px solid #ddd;
-   font-size: 16px;
-   background-color: white; /* Background color */
-   color: #333; /* Text color */
-   transition: border-color 0.3s; /* Smooth transition for border color */
-   cursor: pointer; /* Change cursor to pointer */
-}
-
-/* Change border color on focus */
-.update-disease select:focus {
-   border-color: rgb(101, 100, 100); /* Change border color on focus */
-   outline: none; /* Remove default outline */
-}
-
-/* Option styling */
-.update-disease select option {
-   padding: 10px; /* Padding for options */
-}
-
-/* Hover effect for the select */
-.update-disease select:hover {
-   border-color: rgb(101, 100, 100); /* Change border color on hover */
+/* Main Layout */
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
 }
 
 
+/* Update Location Form Container */
+.update-loc-form-container {
+  flex-grow: 1; /* This allows the form to fill the remaining space next to the sidebar */
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form Centering */
+.update-loc-form {
+  margin-bottom: 120px;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Fields */
+.update-loc-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.update-loc-field p {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.update-loc-field input,
+.update-loc-field select,
+.update-loc-field textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.update-loc-field input:focus,
+.update-loc-field select:focus,
+.update-loc-field textarea:focus {
+  border-color: #888;
+}
+
+.update-loc-field input[type="file"] {
+  padding: 8px;
+  border: none;
+}
+
+/* Button Styles */
+.update-loc-btn {
+  padding: 12px 15px;
+  background-color: #ff4d00;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.update-loc-btn:hover {
+  background-color: #ff7940;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100px; /* Adjust sidebar width on mobile */
+  }
+
+  .update-loc-form-container {
+    padding: 10px;
+  }
+}

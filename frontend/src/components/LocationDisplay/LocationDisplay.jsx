@@ -7,10 +7,15 @@ const LocationDisplay = ({ category }) => {
   const { location_list } = useContext(StoreContext);
 
   return (
-    <div className="food-display" id="diseases-display">
-      <h1>Currently available information...</h1>
-      <p>“contact us +94740956299”</p>
-      <div className="food-display-list">
+    <div className="collection-display" id="diseases-display">
+      <h1>Available Remote Garbage Collecting Areas Near You...</h1>
+      <p1>
+        We offer a convenient service where we collect your waste from
+        designated remote areas, allowing you to manage your trash efficiently
+        without leaving your living space.
+      </p1>
+      <p1>Contact us +94740956299</p1>
+      <div className="collection-display-list">
         {location_list.map((item) => {
           if (category === "All" || category === item.category) {
             return (

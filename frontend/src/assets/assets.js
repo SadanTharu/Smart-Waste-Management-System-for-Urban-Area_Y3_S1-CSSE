@@ -50,28 +50,27 @@ export const assets = {
     parcel_icon,
 };
 
-export const disease_menu_list = [
+export const location_menu_list = [
     {
-        disease_name: "Rice Blast Disease",
-        disease_image: menu_1,
+        location_name: "Kalegana",
+        location_image: menu_1,
     },
     {
-        disease_name: "Bacterial Blight",
-        disease_image: menu_2,
+        location_name: "  Hapugala ",
+        location_image: menu_2,
     },
     {
-        disease_name: "Brown Spot",
-        disease_image: menu_3,
+        location_name: "  RichmondHill ",
+        location_image: menu_3,
     },
     {
-        disease_name: "Sheath Rotr",
-        disease_image: menu_4,
+        location_name: " karapitiya",
+        location_image: menu_4,
     },
     {
-        disease_name: "Rice Tungro Disease",
-        disease_image: menu_5,
+        location_name: "  hiniduma ",
+        location_image: menu_5,
     },
-    // If you plan to use 'menu_6', import and add it here.
 ];
 
 export const disease_list = [

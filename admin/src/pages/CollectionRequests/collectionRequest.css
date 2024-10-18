@@ -1,50 +1,117 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+/* Styling the full page layout */
+.admin-panel {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-panel h2 {
+  color: gray;
+}
+
+/* Styling the collection list layout */
+.collection-list-full {
+  width: 100%; /* Make it span full width */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Collection container styling */
+.collection-container {
+  border: 2px solid #ff4d00;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.collection-container:hover {
+  background-color: #ffefdc;
+}
+
+/* Collection details box styling */
+.collection-details {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Modal actions layout */
+.modal-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Accept and Reject buttons styling */
+.accept-btn,
+.reject-btn {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.accept-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.reject-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Popup animation when request is accepted */
+.accept-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: popupAnimation 0.5s forwards, hidePopup 0.5s forwards 1.5s;
+}
+
+/* Keyframes for showing the popup animation */
+@keyframes popupAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
   }
-  
-  thead {
-    background-color: #f5f5f5;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
+}
+
+/* Keyframes for hiding the popup */
+@keyframes hidePopup {
+  from {
+    opacity: 1;
   }
-  
-  th {
-    background-color: #ff6600;
-    color: white;
+  to {
+    opacity: 0;
   }
-  
-  .accept-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .accept-btn:hover {
-    background-color: #45a049;
-  }
-  
-  .reject-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .reject-btn:hover {
-    background-color: #e60000;
-  }
-  
-  p {
-    font-size: 14px;
-  }
-  
+}
+
+/* Adding hover effect to buttons */
+.accept-btn:hover {
+  background-color: #218838;
+}
+
+.reject-btn:hover {
+  background-color: #c82333;
+}
