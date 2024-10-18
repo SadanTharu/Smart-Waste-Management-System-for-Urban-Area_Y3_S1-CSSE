@@ -95,7 +95,7 @@ const getUserProfile = async (req, res) => {
   
       // Fetch the user from the database using the user ID
       const user = await userModel.findById(userId);
-  
+
       if (!user) {
         return res.status(404).json({ success: false, message: "User not found" });
       }
@@ -146,4 +146,47 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
-export { loginUser, registerUser, getUserProfile, updateUserProfile }
+const AddBin = async (req, res) => {
+    const { binData } = req.body;
+  const userId = req.user.id;  // Assume you've set the user ID from the token middleware
+  
+  try {
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Add the new bin to the user's garbageBinData
+    user.garbageBinData.push(binData);
+
+    await user.save();
+
+    res.status(200).json({ binData });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add bin data' });
+  }
+  };
+
+  const updatePassword = async(req, res) => {
+    const { userId, oldPassword, newPassword } = req.body;
+
+    try {
+      const user = await userModel.findById(userId);
+
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+      if (!isMatch) {
+        return res.status(400).json({ message: 'Old password is incorrect' });
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      await userModel.findByIdAndUpdate(userId, { password: hashedPassword });
+
+      res.json({ message: 'Password updated' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error updating password' });
+    }
+  }
+
+export { loginUser, registerUser, getUserProfile, updateUserProfile, AddBin, updatePassword }

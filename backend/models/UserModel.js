@@ -1,42 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  assessmentTaxNumber: {
-    type: String,
-    required: true
-  },
-  nicNumber: {
-    type: String,
-    required: true
-  },
-  address: {
-    type: String,
-    required: true
-  },
-  phone: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  GarbageBinData: {
-    type: Object,
-    default: {}
-  }
-}, { minimize: false });
+  name: String,
+  email: String,
+  password: String,
+  phone: String,
+  address: String
+});
 
-const userModel = mongoose.models.user || mongoose.model('user', userSchema);
-
-export default userModel;
+export default mongoose.model('User', userSchema);
