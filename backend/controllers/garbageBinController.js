@@ -6,6 +6,7 @@ const addGarbageBin = async (req, res) => {
     const newGarbageBin = new GarbageBin({
         wasteType: req.body.wasteType,
         capacity: req.body.capacity,
+        price: req.body.price,
         binimage,
     });
 

@@ -35,7 +35,7 @@ app.use("/api/auth", authRoutes);
 app.use("/images",express.static('uploads'))
 
 app.use('/api/garbagebin', garbageBinRoutes);
-app.use("/binimage",express.static('binuploads'))
+app.use('/binUpload', express.static(path.join(__dirname, 'binUpload')));
 
 
 app.get("/", (req, res) => {

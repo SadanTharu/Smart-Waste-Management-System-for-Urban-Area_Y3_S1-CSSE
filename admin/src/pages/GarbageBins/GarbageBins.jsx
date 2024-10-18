@@ -8,8 +8,9 @@ import { toast } from "react-toastify";
 const GarbageBins = ({ url }) => {
     const [binimage, setImage] = useState(null);
     const [data, setData] = useState({
-        wasteType: "",
-        capacity: "",
+        wasteType: "Organic",
+        capacity: "10",
+        price: "0",
     });
 
     const onChangeHandler = (event) => {
@@ -23,6 +24,7 @@ const GarbageBins = ({ url }) => {
         formData.append("wasteType", data.wasteType);
         formData.append("capacity", data.capacity);
         formData.append("binimage", binimage);
+        formData.append("price", data.price);
 
         //try catch block for error handling in submitting
 
@@ -31,7 +33,8 @@ const GarbageBins = ({ url }) => {
         if (response.data.success) {
             setData({
             wasteType: "Organic",
-            capacity: "",
+            capacity: "10",
+            price: "0",
             });
             setImage(null);
             toast.success(response.data.message);
@@ -96,6 +99,11 @@ const GarbageBins = ({ url }) => {
             <option value="50">50L</option>
             <option value="75">75L</option>
           </select>
+        </div>
+
+        <div className="add-collection-time flex-col">
+        <p>Price</p>
+        <input onChange={onChangeHandler} value={data.price} type="Number" name="price" placeholder='Write content here' required />
         </div>
 
         <button type="submit" className="add-btn">

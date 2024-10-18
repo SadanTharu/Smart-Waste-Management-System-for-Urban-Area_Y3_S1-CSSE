@@ -10,6 +10,10 @@ const garbageBinSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    price: {
+        type: Number,
+        required: true,
+    },
     binimage: {
         type: String, // You may want to store the image URL or path
         required: true,
