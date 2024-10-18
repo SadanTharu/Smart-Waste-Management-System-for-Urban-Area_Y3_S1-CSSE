@@ -6,6 +6,9 @@ import { fileURLToPath } from 'url';
 import locationRouter from './routes/locationRouter.js';
 import collectionRouter from "./routes/collectionRequestRouter.js";
 
+import 'dotenv/config'
+import userRouter from './routes/userRoute.js'
+
 // App configurations
 const app = express()
 const port = 4000
@@ -30,6 +33,8 @@ app.use("/api/collection", collectionRouter)
 
 app.use("/images",express.static('uploads'))
 
+//sadan
+app.use("/api/user",userRouter)
 
 app.get("/", (req, res) => {
     res.send("API working")
