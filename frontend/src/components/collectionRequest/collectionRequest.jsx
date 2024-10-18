@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
+import { StoreContext } from "../../context/StoreContext";
+import Lottie from "react-lottie";
+import successAnimation from "../../animations/success.json"; // Path to your animation file
+import "./collectionRequest.css";
 
 const AddCollection = () => {
   const [formData, setFormData] = useState({
@@ -10,8 +13,11 @@ const AddCollection = () => {
     reason: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState("");
+  const [isSuccessPopupVisible, setIsSuccessPopupVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isAgreementChecked, setIsAgreementChecked] = useState(false);
+
+  const { addCollection } = useContext(StoreContext);
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -22,42 +28,61 @@ const AddCollection = () => {
     });
   };
 
+  // Handle checkbox change
+  const handleAgreementChange = (e) => {
+    setIsAgreementChecked(e.target.checked);
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!isAgreementChecked) {
+      setErrorMessage("You must accept the additional fee agreement.");
+      return;
+    }
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/collection/add",
-        formData
-      );
-      if (response.data.success) {
-        setSuccessMessage("Collection added successfully!");
-        setErrorMessage(""); // Clear any previous error messages
-        setFormData({
-          name: "",
-          wasteType: "",
-          date: "",
-          address: "",
-          reason: "",
-        }); // Clear form
-      } else {
-        setErrorMessage("Failed to add collection.");
-      }
+      await addCollection(formData);
+      setErrorMessage("");
+      setFormData({
+        name: "",
+        wasteType: "",
+        date: "",
+        address: "",
+        reason: "",
+      });
+      // Show success popup
+      setIsSuccessPopupVisible(true);
+      setTimeout(() => {
+        setIsSuccessPopupVisible(false); // Hide the popup after 3 seconds
+      }, 3000);
     } catch (error) {
       setErrorMessage("Error adding collection. Please try again.");
       console.error("Error:", error);
     }
   };
 
-  return (
-    <div>
-      <h2>Add New Collection</h2>
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+  const successPopupOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: successAnimation,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
-      <form onSubmit={handleSubmit}>
-        <div>
+  return (
+    <div className="form-container">
+      <h2>Add Special Garbage Collection Request</h2>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      {isSuccessPopupVisible && (
+        <div className="success-popup">
+          <Lottie options={successPopupOptions} height={150} width={150} />
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="collection-form">
+        <div className="form-field">
           <label>Name:</label>
           <input
             type="text"
@@ -68,18 +93,23 @@ const AddCollection = () => {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label>Waste Type:</label>
-          <input
-            type="text"
+          <select
             name="wasteType"
             value={formData.wasteType}
             onChange={handleInputChange}
             required
-          />
+          >
+            <option value="">Select waste type</option>
+            <option value="organic">Organic</option>
+            <option value="recyclable">Recyclable</option>
+            <option value="hazardous">Hazardous</option>
+            <option value="general">General</option>
+          </select>
         </div>
 
-        <div>
+        <div className="form-field">
           <label>Date:</label>
           <input
             type="date"
@@ -90,7 +120,7 @@ const AddCollection = () => {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label>Address:</label>
           <input
             type="text"
@@ -101,7 +131,7 @@ const AddCollection = () => {
           />
         </div>
 
-        <div>
+        <div className="form-field">
           <label>Reason:</label>
           <textarea
             name="reason"
@@ -111,7 +141,24 @@ const AddCollection = () => {
           />
         </div>
 
-        <button type="submit">Add Collection</button>
+        <div className="form-field">
+          <label>
+            <input
+              type="checkbox"
+              checked={isAgreementChecked}
+              onChange={handleAgreementChange}
+            />
+            Accept additional fee to be added to my monthly bill
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          className="submit-btn"
+          disabled={!isAgreementChecked}
+        >
+          Add Collection
+        </button>
       </form>
     </div>
   );

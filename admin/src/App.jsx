@@ -14,7 +14,7 @@ import Location from "./pages/Location/Location";
 import AddLocation from "./pages/AddLocation/AddLocation";
 import LocationList from "./pages/LocationList/LocationList";
 import UpdateLocation from "./pages/UpdateLocation/UpdateLocation";
-
+import CollectionRequests from "./pages/CollectionRequests/collectionRequest";
 const App = () => {
   const url = "http://localhost:4000";
 
@@ -31,6 +31,7 @@ const App = () => {
           <Route path="/addlocation" element={<AddLocation url={url} />} />
           <Route path="/list" element={<LocationList url={url} />} />
           <Route path="/update/:id" element={<UpdateLocation />} />{" "}
+          <Route path="/collection" element={<CollectionRequests />} />
           {/* Update Page */}
         </Routes>
       </div>

@@ -15,6 +15,10 @@ const Sidebar = () => {
           <img src={assets.disease_icon} alt="" />
           <p>Disease Management</p>
         </NavLink>
+        <NavLink to="/collection" className="sidebar-option">
+          <img src={assets.disease_icon} alt="" />
+          <p>collection requests</p>
+        </NavLink>
       </div>
     </div>
   );
