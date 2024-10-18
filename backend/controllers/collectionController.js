@@ -70,7 +70,4 @@ const updateCollection = async (req, res) => {
     }
 };
 
-
-
-
 export { addCollection, collectionList, removeCollection, updateCollection }
