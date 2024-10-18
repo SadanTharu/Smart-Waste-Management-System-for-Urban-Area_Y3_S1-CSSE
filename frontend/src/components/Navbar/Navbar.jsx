@@ -52,8 +52,11 @@ const Navbar = () => {
         <Link to="/" onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""} >
           Home
         </Link>
-        <a href="#prediction" onClick={() => setMenu("prediction")} className={menu === "prediction" ? "active" : ""}> Custom Pickup </a>
-        <a href="#diseases" onClick={() => setMenu("diseases")} className={menu === "diseases" ? "active" : ""}> Waste management </a>
+        <a href="#CollectionZone" onClick={() => setMenu("CollectionZone")} className={menu === "CollectionZone" ? "active" : ""}> Collection Zone </a>
+        <a href="#CustomPickup" onClick={() => setMenu("CustomPickup")} className={menu === "CustomPickup" ? "active" : ""}> Custom Pickup </a>
+        <a href="#BinRequest" onClick={() => setMenu("BinRequest")} className={menu === "BinRequest" ? "active" : ""}> Bin Request </a>
+        <a href="#payment" onClick={() => setMenu("payment")} className={menu === "payment" ? "active" : ""}> Payment </a>
+        
       </ul>
       <div className="navbar-right">
         {isLoggedIn ? (

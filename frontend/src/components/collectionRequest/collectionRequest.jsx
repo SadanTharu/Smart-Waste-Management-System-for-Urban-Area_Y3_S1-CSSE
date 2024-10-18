@@ -71,7 +71,7 @@ const AddCollection = () => {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container" id='CustomPickup'>
       <h2>Special Collection Request</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 

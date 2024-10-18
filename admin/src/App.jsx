@@ -15,6 +15,9 @@ import AddLocation from "./pages/AddLocation/AddLocation";
 import LocationList from "./pages/LocationList/LocationList";
 import UpdateLocation from "./pages/UpdateLocation/UpdateLocation";
 import CollectionRequests from "./pages/CollectionRequests/collectionRequest";
+
+import GarbageBins from "./pages/GarbageBins/GarbageBins";
+
 const App = () => {
   const url = "http://localhost:4000";
 
@@ -32,7 +35,8 @@ const App = () => {
           <Route path="/list" element={<LocationList url={url} />} />
           <Route path="/update/:id" element={<UpdateLocation />} />{" "}
           <Route path="/collection" element={<CollectionRequests />} />
-          {/* Update Page */}
+
+          <Route path="/bins" element={<GarbageBins url={url} />} />
         </Routes>
       </div>
     </div>
