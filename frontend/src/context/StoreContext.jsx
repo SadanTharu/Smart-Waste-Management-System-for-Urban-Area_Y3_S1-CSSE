@@ -1,21 +1,32 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { gapi } from "gapi-script";
 
 export const StoreContext = createContext(null);
+
+const clientId =
+  "190098913382-cgc12ml4nme8u32kjgumdcm50nhsc28g.apps.googleusercontent.com"; // Your Google client ID
 
 const StoreContextProvider = (props) => {
   const url = "http://localhost:4000";
   const [location_list, setLocationList] = useState([]);
   const [collection_list, setCollectionList] = useState([]);
 
+  // Login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
+
+  // Fetch location list
   const fetchLocationList = async () => {
     try {
       const response = await axios.get(url + "/api/location/list");
-      setLocationList(response.data.data); // Corrected function usage here
+      setLocationList(response.data.data);
     } catch (error) {
-      console.error("Failed to fetch disease list:", error);
+      console.error("Failed to fetch location list:", error);
     }
   };
+
+  // Fetch collection list
   const fetchCollectionList = async () => {
     try {
       const response = await axios.get(url + "/api/collection/list");
@@ -24,7 +35,8 @@ const StoreContextProvider = (props) => {
       console.error("Failed to fetch collection list:", error);
     }
   };
-  // Add new collection
+
+  // Add a new collection
   const addCollection = async (collectionData) => {
     try {
       const response = await axios.post(
@@ -32,7 +44,6 @@ const StoreContextProvider = (props) => {
         collectionData
       );
       if (response.data.success) {
-        // Update the local state with the newly added collection
         setCollectionList([...collection_list, response.data.newCollection]);
       }
     } catch (error) {
@@ -40,16 +51,27 @@ const StoreContextProvider = (props) => {
     }
   };
 
+  // Initialize Google API for login
   useEffect(() => {
-    fetchLocationList();
-    fetchCollectionList(); // Fetch collection data
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    }
+    gapi.load("client:auth2", start);
   }, []);
 
+  // Context value
   const contextValue = {
     location_list,
+    collection_list,
     url,
-    collection_list, // Add collection data to the context
-    addCollection, // Add collection handler function
+    addCollection,
+    isLoggedIn,
+    setIsLoggedIn,
+    userProfile,
+    setUserProfile,
   };
 
   return (
