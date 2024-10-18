@@ -1,15 +1,15 @@
-import express from 'express'
-import {payBank, payCard, allPayments, updateStatus} from '../controllers/paymentController.js'
+// import express from 'express'
+// import {payBank, payCard, allPayments, updateStatus} from '../controllers/paymentController.js'
 
-const paymentRouter = express.Router()
+// const paymentRouter = express.Router()
 
-//admin features
-paymentRouter.post('/list', allPayments)
-paymentRouter.post('/status', updateStatus)
+// //admin features
+// paymentRouter.post('/list', allPayments)
+// paymentRouter.post('/status', updateStatus)
 
-//payment features
-paymentRouter.post('bank',payBank)
-paymentRouter.post('card', payCard)
+// //payment features
+// paymentRouter.post('bank',payBank)
+// paymentRouter.post('card', payCard)
 
 
-export default paymentRouter
+// export default paymentRouter

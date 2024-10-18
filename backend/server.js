@@ -4,13 +4,11 @@ import { connectDB } from "./config/db.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import locationRouter from './routes/locationRouter.js';
-import diseaseRouter from "./routes/bankDetailsRoute.js";
-import bankDetailsRouter from "./routes/bankDetailsRoute.js";
-import paymentRouter from "./routes/paymentRoutes.js";
+import bankDetailsRouter from "./routes/bankDetailsRoute.js"; // Updated to use bankDetailsRouter
 
 // App configurations
-const app = express()
-const port = 4000
+const app = express();
+const port = 4000;
 
 // Get current directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -20,24 +18,20 @@ const __dirname = path.dirname(__filename);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Middleware
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
 // DB connection
 connectDB();
 
 // API Endpoints
-app.use("/api/location", locationRouter)
-app.use("/images",express.static('uploads'))
-app.use("/api/diseaseInquiry", diseaseRouter)
-app.use("/api/bankDetails",bankDetailsRouter)
-app.use("/api/payment", paymentRouter)
-
+app.use("/api/location", locationRouter);
+app.use("/api/bankDetails", bankDetailsRouter);
 
 app.get("/", (req, res) => {
-    res.send("API working")
-})
+    res.send("API working");
+});
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`)
-})
+    console.log(`Server is running on http://localhost:${port}`);
+});

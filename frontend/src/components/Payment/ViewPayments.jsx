@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import './ViewBankDetails.css';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+// import './ViewBankDetails.css';
 
 const ViewBankDetails = () => {
   const [bankDetails, setBankDetails] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState(''); // State for the search input
-  const [startDate, setStartDate] = useState(''); // Date range start
-  const [endDate, setEndDate] = useState(''); // Date range end
+  const [searchQuery, setSearchQuery] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('bank'); // Default to 'bank'
 
   // Fetch bank details from the API
   useEffect(() => {
@@ -27,13 +28,15 @@ const ViewBankDetails = () => {
     fetchBankDetails();
   }, []);
 
-  // Filter bank details based on the search query and date range
+  // Filter bank details based on the search query, date range, and payment method
   const filteredDetails = bankDetails.filter((detail) => {
     const matchesSearch = detail.residentName.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesDate =
       (!startDate || new Date(detail.date).toLocaleDateString() >= new Date(startDate)) &&
       (!endDate || new Date(detail.date).toLocaleDateString() <= new Date(endDate));
-    return matchesSearch && matchesDate;
+    const matchesPaymentMethod = detail.paymentMethod === paymentMethod;
+
+    return matchesSearch && matchesDate && matchesPaymentMethod;
   });
 
   // Clear all filters
@@ -41,6 +44,7 @@ const ViewBankDetails = () => {
     setSearchQuery('');
     setStartDate('');
     setEndDate('');
+    setPaymentMethod('bank'); // Reset payment method
   };
 
   // Delete bank detail handler
@@ -61,8 +65,8 @@ const ViewBankDetails = () => {
     const tableData = filteredDetails.map((detail) => [
       detail.residentID,
       detail.residentName,
-      detail.bank,
-      detail.branch,
+      detail.paymentMethod === 'bank' ? detail.bank : 'N/A',
+      detail.paymentMethod === 'bank' ? detail.branch : 'N/A',
       detail.amount,
       new Date(detail.date).toLocaleDateString(),
     ]);
@@ -85,6 +89,17 @@ const ViewBankDetails = () => {
   return (
     <div className="view-bankdetails-container">
       <h2 className="header45">View Bank Details</h2>
+
+      <div className="payment-method-buttons">
+        <button className={`payment-method-btn ${paymentMethod === 'bank' ? 'active' : ''}`} 
+          onClick={() => setPaymentMethod('bank')}>
+          Bank Transfers
+        </button>
+        <button className={`payment-method-btn ${paymentMethod === 'card' ? 'active' : ''}`} 
+          onClick={() => setPaymentMethod('card')}>
+          Card Payments
+        </button>
+      </div>
 
       <input
         type="text"
@@ -116,9 +131,24 @@ const ViewBankDetails = () => {
               <div className="bankdetails-details">
                 <h3>{detail.residentName}</h3>
                 <p><strong>Resident ID:</strong> {detail.residentID}</p>
-                <p><strong>Bank:</strong> {detail.bank}</p>
-                <p><strong>Branch:</strong> {detail.branch}</p>
-                <p><strong>Amount:</strong> {detail.amount}</p>
+                {paymentMethod === 'bank' ? (
+                  <>
+                    <p><strong>Bank:</strong> {detail.bank}</p>
+                    <p><strong>Branch:</strong> {detail.branch}</p>
+                    <p><strong>Amount:</strong> {detail.amount}</p>
+                    {detail.receiptUrl && (
+                      <p>
+                        <strong>Upload Receipt:</strong>
+                        <img src={detail.receiptUrl} alt="Receipt" style={{ width: '100px', height: 'auto' }} />
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <p><strong>Amount:</strong> {detail.amount}</p>
+                    <p><strong>Card Holder:</strong> {detail.cardHolder}</p>
+                  </>
+                )}
                 <p><strong>Date:</strong> {new Date(detail.date).toLocaleDateString()}</p>
               </div>
               <div className="bankdetails-actions">

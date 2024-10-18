@@ -15,7 +15,9 @@ import AddLocation from "./pages/AddLocation/AddLocation";
 import LocationList from "./pages/LocationList/LocationList";
 import UpdateLocation from "./pages/UpdateLocation/UpdateLocation";
 import ViewInquiries from "./pages/Payment/Inquiry";
-import ViewBankDetails from "./pages/Payment/payment";
+import AdminBankDetails from "./pages/Payment/payment";
+// import ViewBankDetails from "./pages/Payment/payment";
+
 
 const App = () => {
   const url = "http://localhost:4000";
@@ -34,7 +36,8 @@ const App = () => {
           <Route path="/list" element={<LocationList url={url} />} />
           <Route path="/update/:id" element={<UpdateLocation />} />{" "}
           <Route path="/inquiry" element={<ViewInquiries/>} />
-          <Route path="/payments" element={<ViewBankDetails/>} />
+          {/* <Route path="/payments" element={<ViewBankDetails/>} /> */}
+          <Route path="/verify" element={<AdminBankDetails/>}/>
           {/* Update Page */}
         </Routes>
       </div>
