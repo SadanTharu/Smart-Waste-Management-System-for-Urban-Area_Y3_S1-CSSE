@@ -9,7 +9,7 @@ const AddLocation = ({ url }) => {
   const [data, setData] = useState({
     locationName: "",
     wasteType: "",
-    openTime: "morning", // Default garbage type
+    openTime: "", // Default garbage type
     address: "", // Default collection time
   });
 
@@ -114,7 +114,7 @@ const AddLocation = ({ url }) => {
           <p>Garbage Collection Time</p>
           <select
             onChange={onChangeHandler}
-            name="collectionTime"
+            name="openTime"
             value={data.openTime}
             className="custom-select"
             required
