@@ -146,27 +146,6 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
-const AddBin = async (req, res) => {
-    const { binData } = req.body;
-  const userId = req.user.id;  // Assume you've set the user ID from the token middleware
-  
-  try {
-    const user = await userModel.findById(userId);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    // Add the new bin to the user's garbageBinData
-    user.garbageBinData.push(binData);
-
-    await user.save();
-
-    res.status(200).json({ binData });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to add bin data' });
-  }
-  };
-
   const updatePassword = async(req, res) => {
     const { userId, oldPassword, newPassword } = req.body;
 
@@ -189,4 +168,4 @@ const AddBin = async (req, res) => {
     }
   }
 
-export { loginUser, registerUser, getUserProfile, updateUserProfile, AddBin, updatePassword }
+export { loginUser, registerUser, getUserProfile, updateUserProfile, updatePassword }
