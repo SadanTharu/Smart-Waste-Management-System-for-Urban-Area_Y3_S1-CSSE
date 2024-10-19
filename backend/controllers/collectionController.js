@@ -9,6 +9,8 @@ const addCollection = async (req, res) => {
         date: req.body.date,
         address: req.body.address,
         reason: req.body.reason,
+        userId: req.body.userId, // Store the userId with the request
+
     })
 
     try {
@@ -70,4 +72,15 @@ const updateCollection = async (req, res) => {
     }
 };
 
-export { addCollection, collectionList, removeCollection, updateCollection }
+// Fetch all collections for a specific user
+const collectionListByUser = async (req, res) => {
+    try {
+        const collection = await collectionModel.find({ userId: req.params.userId });
+        res.json({ success: true, data: collection });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error fetching collection" });
+    }
+};
+
+export { addCollection, collectionList, removeCollection, updateCollection,collectionListByUser }

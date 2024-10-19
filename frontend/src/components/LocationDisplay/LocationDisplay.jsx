@@ -14,7 +14,8 @@ const LocationDisplay = ({ category }) => {
         designated remote areas, allowing you to manage your trash efficiently
         without leaving your living space.
       </p>
-      <p1>Contact us +94740956299</p1>
+      <p>Contact us +94740956299</p>
+      matheesha-test-case
       <div className="collection-display-list">
         {location_list.map((item) => {
           if (category === "All" || category === item.category) {

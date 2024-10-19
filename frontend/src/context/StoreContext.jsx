@@ -61,7 +61,8 @@ const StoreContextProvider = (props) => {
     }
     gapi.load("client:auth2", start);
     fetchLocationList();
-    fetchCollectionList(); // Fetch collection data
+
+    fetchCollectionList();
   }, []);
 
   // Context value
