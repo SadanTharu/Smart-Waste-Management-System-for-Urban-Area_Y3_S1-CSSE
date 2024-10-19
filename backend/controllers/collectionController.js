@@ -1,6 +1,6 @@
 import collectionModel from '../models/collectionRequestModel.js';
 import fs from 'fs';
-//add location 
+//add collection 
 const addCollection = async (req, res) => {
 
     const collection = new collectionModel({
@@ -23,7 +23,7 @@ const addCollection = async (req, res) => {
 }
 
 
-//all location lists
+//all collection lists
 const collectionList = async (req, res) => {
     try {
         const collection = await collectionModel.find({});
@@ -35,7 +35,7 @@ const collectionList = async (req, res) => {
 }
 
 
-//remove location 
+//remove collection 
 const removeCollection = async (req, res) => {
     try {
         const collection = await collectionModel.findById(req.body.id);
@@ -82,5 +82,27 @@ const collectionListByUser = async (req, res) => {
         res.json({ success: false, message: "Error fetching collection" });
     }
 };
+// Update acceptance status of collection
+const updateAcceptanceStatus = async (req, res) => {
+    const { id, isAccepted } = req.body; // Receive collection ID and the status
 
-export { addCollection, collectionList, removeCollection, updateCollection,collectionListByUser }
+    try {
+        const updatedCollection = await collectionModel.findByIdAndUpdate(
+            id,
+            { isAccepted },
+            { new: true } // Return the updated document
+        );
+
+        if (!updatedCollection) {
+            return res.status(404).json({ success: false, message: "Collection not found" });
+        }
+
+        res.json({ success: true, data: updatedCollection });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error updating acceptance status" });
+    }
+};
+
+
+export { addCollection, collectionList, removeCollection, updateCollection,collectionListByUser,updateAcceptanceStatus }

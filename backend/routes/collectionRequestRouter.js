@@ -1,5 +1,5 @@
 import express from 'express';
-import { addCollection, collectionList, removeCollection, updateCollection,collectionListByUser } from '../controllers/collectionController.js';
+import { addCollection, collectionList, removeCollection, updateCollection,collectionListByUser,updateAcceptanceStatus } from '../controllers/collectionController.js';
 
 const collectionRouter = express.Router();
 
@@ -11,6 +11,8 @@ collectionRouter.post("/remove", removeCollection); // Remove a collection
 collectionRouter.put("/update/:id", updateCollection); // Update a collection (text data only)
 
 collectionRouter.get("/collection/:userId", collectionListByUser); // Fetch collections by user
+collectionRouter.post("/update-status", updateAcceptanceStatus);
+
 
 
 export default collectionRouter;

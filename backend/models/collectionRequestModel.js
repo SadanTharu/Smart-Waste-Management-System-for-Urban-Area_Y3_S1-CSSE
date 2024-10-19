@@ -7,7 +7,9 @@ const collectionSchema = new mongoose.Schema({
     address: { type: String, required: true },       
     reason: { type: String, required: true },   
     userId: { type: String, required: true }, // Add userId field to associate the request with the user
+    isAccepted: { type: Boolean, default: null } // Add field to track acceptance/rejection status
 });
+
 
 const collectionModel = mongoose.models.collection || mongoose.model("collection", collectionSchema);
 export default collectionModel;

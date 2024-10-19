@@ -7,7 +7,8 @@ const AdminPanel = () => {
   const [selectedCollectionId, setSelectedCollectionId] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [showAcceptPopup, setShowAcceptPopup] = useState(false); // State for animation popup
+  const [showPopup, setShowPopup] = useState(false); // State for popup visibility
+  const [popupMessage, setPopupMessage] = useState(""); // State for popup message
 
   const url = "http://localhost:4000"; // Replace with your actual backend URL
 
@@ -16,9 +17,8 @@ const AdminPanel = () => {
     const fetchCollections = async () => {
       try {
         const response = await axios.get(`${url}/api/collection/list`);
-
         if (response.status === 200 && response.data.success) {
-          setLocalCollectionList(response.data.data); // Ensure data is accessed correctly
+          setLocalCollectionList(response.data.data);
         } else {
           setErrorMessage("Failed to fetch collection data.");
         }
@@ -31,47 +31,71 @@ const AdminPanel = () => {
     fetchCollections();
   }, []);
 
-  // Handle Reject - Remove the item from both frontend and backend
-  const handleReject = async (id) => {
+  // Handle Accept
+  const handleAccept = async (id) => {
     try {
-      const response = await axios.post(`${url}/api/collection/remove`, {
-        id: id, // Send collection ID
+      const response = await axios.post(`${url}/api/collection/update-status`, {
+        id: id,
+        isAccepted: true, // Mark as accepted
       });
 
       if (response.data.success) {
+        setSuccessMessage("Collection accepted successfully.");
+        setPopupMessage("Collection has been accepted.");
         setLocalCollectionList((prevList) =>
-          prevList.filter((collection) => collection._id !== id)
+          prevList.map((collection) =>
+            collection._id === id
+              ? { ...collection, isAccepted: true }
+              : collection
+          )
         );
-        setSuccessMessage("Collection rejected and removed successfully.");
+        setShowPopup(true); // Show popup after action
       } else {
-        setErrorMessage("Failed to remove collection.");
+        setErrorMessage("Failed to accept collection.");
       }
     } catch (error) {
-      setErrorMessage("Network error while rejecting the collection.");
-      console.error("Error rejecting collection:", error);
+      setErrorMessage("Error while accepting collection.");
+      console.error("Error accepting collection:", error);
     }
 
-    setSelectedCollectionId(null); // Deselect after rejection
-  };
-
-  // Handle Accept with animation
-  const handleAccept = (id) => {
-    console.log("Accepted collection with ID:", id);
-
-    // Trigger popup animation
-    setShowAcceptPopup(true);
-
-    // Hide the popup after a few seconds
-    setTimeout(() => {
-      setShowAcceptPopup(false);
-    }, 2000); // Adjust the duration of the popup display
-
+    setTimeout(() => setShowPopup(false), 2000); // Hide popup after 2 seconds
     setSelectedCollectionId(null); // Deselect after accepting
   };
 
-  // Toggle showing the details of the selected collection
+  // Handle Reject
+  const handleReject = async (id) => {
+    try {
+      const response = await axios.post(`${url}/api/collection/update-status`, {
+        id: id,
+        isAccepted: false, // Mark as rejected
+      });
+
+      if (response.data.success) {
+        setSuccessMessage("Collection rejected successfully.");
+        setPopupMessage("Collection has been rejected.");
+        setLocalCollectionList((prevList) =>
+          prevList.map((collection) =>
+            collection._id === id
+              ? { ...collection, isAccepted: false }
+              : collection
+          )
+        );
+        setShowPopup(true); // Show popup after action
+      } else {
+        setErrorMessage("Failed to reject collection.");
+      }
+    } catch (error) {
+      setErrorMessage("Error while rejecting collection.");
+      console.error("Error rejecting collection:", error);
+    }
+
+    setTimeout(() => setShowPopup(false), 2000); // Hide popup after 2 seconds
+    setSelectedCollectionId(null); // Deselect after rejecting
+  };
+
+  // Toggle the display of details for a specific collection
   const toggleDetails = (id) => {
-    setSelectedCollectionId((prevId) => (prevId === id ? null : id));
+    setSelectedCollectionId((prevId) => (prevId === id ? null : id)); // Toggle between show/hide
   };
 
   return (
@@ -137,10 +161,10 @@ const AdminPanel = () => {
         )}
       </div>
 
-      {/* Popup for Accept Animation */}
-      {showAcceptPopup && (
-        <div className="accept-popup">
-          <p>Request Accepted!</p>
+      {/* Popup for Action (Accept/Reject) */}
+      {showPopup && (
+        <div className="action-popup">
+          <p>{popupMessage}</p>
         </div>
       )}
     </div>
