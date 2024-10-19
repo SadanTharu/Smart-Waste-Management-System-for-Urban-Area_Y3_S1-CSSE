@@ -17,7 +17,7 @@ const AddCollection = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isAgreementChecked, setIsAgreementChecked] = useState(false);
 
-  const { addCollection } = useContext(StoreContext);
+  const { addCollection, userProfile } = useContext(StoreContext); // Fetch userProfile from context
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -40,8 +40,14 @@ const AddCollection = () => {
       setErrorMessage("You must accept the additional fee agreement.");
       return;
     }
+
+    const dataToSubmit = {
+      ...formData,
+      userId: userProfile.googleId, // Pass the user's ID along with the form data
+    };
+
     try {
-      await addCollection(formData);
+      await addCollection(dataToSubmit);
       setErrorMessage("");
       setFormData({
         name: "",
@@ -71,7 +77,7 @@ const AddCollection = () => {
   };
 
   return (
-    <div className="form-container" id='CustomPickup'>
+    <div className="form-container" id="CustomPickup">
       <h2>Special Collection Request</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
