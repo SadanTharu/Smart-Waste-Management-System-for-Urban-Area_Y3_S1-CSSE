@@ -107,11 +107,21 @@ const AdminPanel = () => {
                 </p>
                 <p>
                   <strong>Status:</strong>{" "}
-                  {collection.isAccepted === true
-                    ? "Accepted"
-                    : collection.isAccepted === false
-                    ? "Rejected"
-                    : "Pending"}
+                  <span
+                    className={
+                      collection.isAccepted === true
+                        ? "status-text accepted"
+                        : collection.isAccepted === false
+                        ? "status-text rejected"
+                        : "status-text pending"
+                    }
+                  >
+                    {collection.isAccepted === true
+                      ? "Accepted"
+                      : collection.isAccepted === false
+                      ? "Rejected"
+                      : "Pending"}
+                  </span>
                 </p>
               </div>
 
