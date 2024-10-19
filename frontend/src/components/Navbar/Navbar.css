@@ -97,8 +97,62 @@
     cursor: pointer;
   }
 
-
-
- 
-
-
+  .profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .profile-popup {
+    position: fixed; /* Use fixed to center the popup relative to the viewport */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position back to center */
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 75%; /* Set width to 75% of the screen */
+    max-width: 800px; /* Optional max width for large screens */
+    z-index: 1000;
+    text-align: center; /* Center text and content within the popup */
+  }
+  
+  .profile-popup-image {
+    width: 100px; /* Adjust the size of the profile image */
+    height: 100px;
+    border-radius: 50%; /* Make the image circular */
+    margin: 0 auto 10px auto; /* Center the image with automatic margins */
+  }
+  
+  .profile-popup h3 {
+    margin: 0 0 10px 0;
+  }
+  
+  .profile-popup p {
+    margin: 5px 0;
+  }
+  
+  .profile-buttons {
+    display: flex; /* Use flexbox to arrange buttons in a row */
+    justify-content: center; /* Center the buttons */
+    margin: 10px 0; /* Add margin for spacing */
+  }
+  
+  .profile-button {
+    background-color: #007bff; /* Blue background for buttons */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px; /* Space between buttons */
+    transition: background-color 0.3s; /* Smooth background color transition */
+  }
+  
+  .profile-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }

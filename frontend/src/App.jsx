@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Login from "./components/login";
 import Logout from "./components/logout";
+import Vault from "./pages/Vault/Vault";
 import { gapi } from "gapi-script";
 
 const clientId =
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/" element={<Home/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/vault" element={<Vault vaultName="My Vault" userName="User Name" vaultBalance={1000} />} />
         </Routes>
       </div>
       <Footer />
