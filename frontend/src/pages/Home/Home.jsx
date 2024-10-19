@@ -6,12 +6,12 @@ import { useState } from "react";
 import AppDownload from "../../components/AppDownload/AppDownload";
 import LocationDisplay from "../../components/LocationDisplay/LocationDisplay";
 import CollectionRequest from "../../components/collectionRequest/collectionRequest";
-import BinRequest from '../../components/BinRequest/BinRequest';
+import BinRequest from "../../components/BinRequest/BinRequest";
 
 const Home = () => {
   const [category, setCategory] = useState("All");
-  const url = "http://localhost:4000"
-  
+  const url = "http://localhost:4000";
+
   return (
     <div>
       <Header />
