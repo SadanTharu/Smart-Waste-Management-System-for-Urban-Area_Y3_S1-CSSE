@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoutes.js";
 import garbageBinRoutes from "./routes/garbageBinRoutes.js";
 import paymentRoutes from './routes/paymentRoutes.js';
 import binPurchaseRoutes from './routes/binPurchaseRoutes.js';
+import garbageRoutes from './routes/garbageRoutes.js';
 
 // App configurations
 const app = express()
@@ -40,6 +41,7 @@ app.use('/api/garbagebin', garbageBinRoutes);
 app.use('/binUpload', express.static(path.join(__dirname, 'binUpload')));
 app.use('/api/payments', paymentRoutes);
 app.use('/api/binPurchases', binPurchaseRoutes);
+app.use('/api/garbage', garbageRoutes);
 
 app.get("/", (req, res) => {
     res.send("API working")

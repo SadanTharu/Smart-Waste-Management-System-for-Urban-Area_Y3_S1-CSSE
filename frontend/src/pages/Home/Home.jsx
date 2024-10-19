@@ -7,6 +7,7 @@ import AppDownload from "../../components/AppDownload/AppDownload";
 import LocationDisplay from "../../components/LocationDisplay/LocationDisplay";
 import CollectionRequest from "../../components/collectionRequest/collectionRequest";
 import BinRequest from "../../components/BinRequest/BinRequest";
+import Payment from "../../components/payment/payment";
 
 const Home = () => {
   const [category, setCategory] = useState("All");
@@ -20,6 +21,7 @@ const Home = () => {
       <CollectionRequest />
       <BinRequest />
       <AppDownload />
+      <Payment />
     </div>
   );
 };

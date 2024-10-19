@@ -18,7 +18,7 @@ import CollectionRequests from "./pages/CollectionRequests/collectionRequest";
 
 import GarbageBins from "./pages/GarbageBins/GarbageBins";
 import FullGarbageBins from "./pages/fullbins/fullbins";
-import ScanGarbageBins from './pages/scanbin/scanbin'
+import ScanGarbageBins from './pages/scanbin/scanbin';
 
 const App = () => {
   const url = "http://localhost:4000";
@@ -41,6 +41,7 @@ const App = () => {
           <Route path="/bins" element={<GarbageBins url={url} />} />
           <Route path="/fullbins" element={<FullGarbageBins url={url} />} />
           <Route path="/scanbins" element={<ScanGarbageBins url={url} />} />
+
         </Routes>
       </div>
     </div>
