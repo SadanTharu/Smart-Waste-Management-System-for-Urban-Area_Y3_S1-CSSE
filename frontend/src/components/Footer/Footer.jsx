@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-content-left">
           <img src={assets.logo} alt=""></img>
-          <p>Experience precision in crop prediction, disease management, and treatment solutions at Crop Shield in Sri Lanka. Explore our innovative agricultural services.</p>
+          <p>Explore our innovative services.</p>
           <div className="footer-social-icons">
             <img src={assets.facebook_icon} alt="" />
             <img src={assets.twitter_icon} alt="" />
@@ -26,13 +26,15 @@ const Footer = () => {
         <div className="footer-content-right">
           <h2>GET IN TOUCH</h2>
           <ul>
-            <li>+94 711223344</li>
-            <li>cropshield@gmail.com</li>
+            <li>+94 740956299</li>
+            <li>rewaste@gmail.com</li>
           </ul>
         </div>
       </div>
       <hr />
-      <p className="footer-copyright">copyright 2024 Y3S1 WE-SE-59 - All Right Reserved.</p>
+      <p className="footer-copyright">
+        copyright 2024 Y3S1 WE-SE-59 - All Right Reserved.
+      </p>
     </div>
   );
 };

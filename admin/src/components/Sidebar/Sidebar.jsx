@@ -8,19 +8,19 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-options">
         <NavLink to="/addlocation" className="sidebar-option">
-          <img src={assets.disease_icon} alt="" />
+          <img src={assets.location} alt="" />
           <p>add location</p>
         </NavLink>
         <NavLink to="/list" className="sidebar-option">
-          <img src={assets.disease_icon} alt="" />
+          <img src={assets.list} alt="" />
           <p>added location list</p>
         </NavLink>
         <NavLink to="/collection" className="sidebar-option">
-          <img src={assets.disease_icon} alt="" />
+          <img src={assets.request} alt="" />
           <p>collection requests</p>
         </NavLink>
         <NavLink to="/bins" className="sidebar-option">
-          <img src={assets.disease_icon} alt="" />
+          <img src={assets.bin} alt="" />
           <p>Bins Types</p>
         </NavLink>
       </div>

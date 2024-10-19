@@ -1,5 +1,5 @@
 /* Main container styling */
-.disease-container-main {
+.location-container-main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@
 }
 
 /* Heading styling */
-.diseasetopiccontainner-main h1 {
+.locationtopiccontainner-main h1 {
   color: #676363; /* Neutral black text color */
   font-size: 2.5rem;
   font-weight: bold;
@@ -24,7 +24,7 @@
 }
 
 /* Navigation buttons container styling */
-.diseasetopiccontainner-2-main {
+.locationtopiccontainner-2-main {
   margin-top: 70px;
   display: flex;
   justify-content: center;
@@ -32,14 +32,14 @@
 }
 
 /* Disease actions container styling */
-.disease-actions-main {
+.location-actions-main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 /* Individual action button styling */
-.disease-action-main {
+.location-action-main {
   background-color: #ffffff;
   color: #000000;
   padding: 15px 30px;
@@ -54,12 +54,12 @@
 }
 
 /* Hover effect for action buttons */
-.disease-action-main:hover {
+.location-action-main:hover {
   background-color: #f0f0f0;
   color: #000000;
 }
 
 /* Button text styling */
-.disease-action-main p {
+.location-action-main p {
   margin: 0;
 }

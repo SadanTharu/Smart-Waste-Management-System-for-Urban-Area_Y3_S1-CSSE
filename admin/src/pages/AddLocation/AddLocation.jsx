@@ -8,9 +8,9 @@ const AddLocation = ({ url }) => {
   const [image, setImage] = useState(null);
   const [data, setData] = useState({
     locationName: "",
-    wasteType: "",
-    openTime: "", // Default garbage type
-    address: "", // Default collection time
+    wasteType: "organic", // Set default waste type
+    openTime: "morning 9.30 - 11.00", // Set default garbage collection time
+    address: "", // Default collection address
   });
 
   const onChangeHandler = (event) => {
@@ -20,6 +20,19 @@ const AddLocation = ({ url }) => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+
+    // Validate before submission
+    if (
+      !data.locationName ||
+      !data.wasteType ||
+      !data.openTime ||
+      !data.address ||
+      !image
+    ) {
+      toast.error("Please fill all fields and upload an image.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("locationName", data.locationName);
     formData.append("wasteType", data.wasteType);
@@ -27,16 +40,15 @@ const AddLocation = ({ url }) => {
     formData.append("address", data.address);
     formData.append("image", image);
 
-    //try catch block for eror handling in submitting
-
+    //try-catch block for error handling in submitting
     try {
       const response = await axios.post(`${url}/api/location/add`, formData);
       if (response.data.success) {
         setData({
           locationName: "",
-          wasteType: "",
-          openTime: "morning",
-          address: "galle",
+          wasteType: "organic", // Reset to default
+          openTime: "morning 9.30 - 11.00", // Reset to default
+          address: "",
         });
         setImage(null);
         toast.success(response.data.message);
@@ -88,7 +100,7 @@ const AddLocation = ({ url }) => {
             value={data.address}
             name="address"
             rows="6"
-            placeholder="add the address"
+            placeholder="Add the address"
             required
           />
         </div>
@@ -119,9 +131,11 @@ const AddLocation = ({ url }) => {
             className="custom-select"
             required
           >
-            <option value="morning">Morning</option>
-            <option value="afternoon">Afternoon</option>
-            <option value="evening">Evening</option>
+            <option value="morning 9.30 - 11.00">Morning 9.30 - 11.00</option>
+            <option value="afternoon 12.00 - 2.00">
+              Afternoon 12.00 - 2.00
+            </option>
+            <option value="evening 4.30 - 5.00">Evening 4.30 - 5.00</option>
           </select>
         </div>
 

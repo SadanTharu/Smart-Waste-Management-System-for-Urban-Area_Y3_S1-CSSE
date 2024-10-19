@@ -6,7 +6,7 @@ import { useState } from "react";
 import AppDownload from "../../components/AppDownload/AppDownload";
 import LocationDisplay from "../../components/LocationDisplay/LocationDisplay";
 import CollectionRequest from "../../components/collectionRequest/collectionRequest";
-import BinRequest from "../../components/BinRequest/BinRequest";
+import SubmittedRequests from "../../components/SubmittedRequests/SubmittedRequests";
 
 const Home = () => {
   const [category, setCategory] = useState("All");
@@ -18,7 +18,7 @@ const Home = () => {
       <ExploreLocations category={category} setCategory={setCategory} />
       <LocationDisplay category={category} />
       <CollectionRequest />
-      <BinRequest />
+      <SubmittedRequests />
       <AppDownload />
     </div>
   );

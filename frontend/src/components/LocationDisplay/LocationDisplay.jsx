@@ -12,10 +12,8 @@ const LocationDisplay = ({ category }) => {
       <p>
         We offer a convenient service where we collect your waste from
         designated remote areas, allowing you to manage your trash efficiently
-        without leaving your living space.
       </p>
       <p>Contact us +94740956299</p>
-      matheesha-test-case
       <div className="collection-display-list">
         {location_list.map((item) => {
           if (category === "All" || category === item.category) {

@@ -13,6 +13,10 @@ import remedy from './remedy.png'
 import newDiscovered from './newdiscovered.png'
 import delete_icon from './delete_icon.png'
 import update_icon from './update_icon.png'
+import location from './location.png'
+import list from './list.png'
+import request from './request.png'
+import bin from './bin.png'
 
 export const assets ={
     logo,
@@ -30,7 +34,11 @@ export const assets ={
     remedy,
     newDiscovered,
     delete_icon,
-    update_icon
+    update_icon,
+    location,
+    list,
+    request,
+    bin
 
 
 }
