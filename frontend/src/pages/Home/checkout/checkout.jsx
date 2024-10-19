@@ -89,7 +89,7 @@ const CheckoutPage = () => {
   <div className="checkout-container">
     {/* Left Side: Selected Items and User Details */}
     <div className="left-side">
-      <h2>Total Cost: ${checkoutData.totalCost}</h2>
+      <h2>Total Cost: Rs.{checkoutData.totalCost}</h2>
 
       <h3>Selected Items:</h3>
       <ul>
