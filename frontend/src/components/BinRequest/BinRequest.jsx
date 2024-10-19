@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import "./BinRequest.css";
+
+// Initialize Stripe
+const stripePromise = loadStripe('your-publishable-key-here'); // Replace with your Stripe publishable key
 
 const BinRequest = ({ url }) => {
   const [bins, setBins] = useState([]);
-  const [quantities, setQuantities] = useState({}); // To track quantities for each bin
-  const [totalCost, setTotalCost] = useState(0); // To track the total cost
+  const [quantities, setQuantities] = useState({});
+  const [totalCost, setTotalCost] = useState(0);
 
   useEffect(() => {
     const fetchBins = async () => {
@@ -51,6 +56,27 @@ const BinRequest = ({ url }) => {
     setTotalCost(newTotalCost);
   }, [quantities, bins]);
 
+  const handleCheckout = async () => {
+    try {
+      const response = await axios.post('http://localhost:4000/api/checkout', {
+        items: bins.map((bin) => ({
+          id: bin._id,
+          quantity: quantities[bin._id],
+          price: bin.price,
+        })),
+        totalCost
+      });
+
+      const { sessionId } = response.data;
+      const stripe = await stripePromise;
+
+      // Redirect to Stripe Checkout
+      await stripe.redirectToCheckout({ sessionId });
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    }
+  };
+
   return (
     <div className="bin-request" id='BinRequest'>
       <h1>Available Garbage Bins for Purchase</h1>
@@ -74,6 +100,10 @@ const BinRequest = ({ url }) => {
         <p>No garbage bins available for purchase at the moment.</p>
       )}
       <h3>Total Cost: ${totalCost}</h3> {/* Display total cost */}
+
+      <button onClick={handleCheckout} className="checkout-button">
+        Proceed to Payment
+      </button> {/* Payment Button */}
     </div>
   );
 };
