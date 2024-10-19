@@ -1,158 +1,167 @@
 /* Navbar.css */
 
 .navbar {
-    padding: 20px 0px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar.logo {
-    width: 150px;
-  }
-  
-  .navbar-menu{
-    display: flex;
-
-    list-style: none;
-    gap: 20px;
-    color: #49557e;
-    font-size: 18px;
-  }
-
-  .navbar-right{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .navbar button {
-    background:transparent;
-    font-size: 16px;
-    color: #49557e;
-    border: 1px solid green;
-    padding: 10px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3;
+  padding: 20px 15px; /* Add some padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* Position relative for absolute children */
+  background-color: #fff; /* Set background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
-   
+
+.navbar-toggle {
+  display: none; /* Hide toggle by default */
+  font-size: 30px;
+  cursor: pointer;
+  color: #49557e; /* Match toggle color with navbar */
+}
+
+.navbar-menu {
+  display: flex; /* Default display for desktop */
+  list-style: none;
+  gap: 20px;
+  color: #49557e;
+  font-size: 18px;
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.navbar-menu.open {
+  display: flex; /* Show menu when open */
+  flex-direction: column; /* Stack items vertically */
+  width: 100%; /* Full width for mobile */
+  background-color: white; /* Background color for dropdown */
+  margin-top: 10px; /* Add some space below the navbar */
+  padding: 10px 0; /* Padding for dropdown */
+  border-radius: 5px; /* Rounded corners for dropdown */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for dropdown */
+}
+
+.navbar-menu li {
+  padding: 10px 15px; /* Add padding for each menu item */
+  text-align: center; /* Center align text */
+  width: 100%; /* Full width for touch targets */
+}
+
+.navbar-menu li:hover {
+  background-color: #f5f5f5; /* Background color on hover */
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar button {
+  background: transparent;
+  font-size: 16px;
+  color: #49557e;
+  border: 1px solid green;
+  padding: 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .navbar button:hover {
-    background-color: #fff4f2;
-  }
- 
-  .navbar .active {
-    padding-bottom: 2px;
-    border-bottom: 2px solid #49557e;
-}  
-.navbar li{
-    cursor: pointer;
+  background-color: #fff4f2;
 }
 
-
-.navbar-search-icon{
-    position: relative;
+.navbar .active {
+  padding-bottom: 2px;
+  border-bottom: 2px solid #49557e;
 }
 
-
-.navbar-search-icon .dot{
-    position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: tomato;
-    border-radius: 5px;
-    top: -8px;
-    right: -8px;
-
-}
-@media (max-width: 900px){
-  .navbar.logo{
-    width: 120px;
+@media (max-width: 900px) {
+  .navbar.logo {
+      width: 120px;
   }
-  .navbar-menu{
-    gap: 15px;
-    font-size: 16px;
 
+  .navbar-menu {
+      display: none; /* Hide menu by default on mobile */
+      gap: 0; /* No gap between items */
+      font-size: 16px;
   }
-  .navbar-right{
-    gap: 20px;
+
+  .navbar-toggle {
+      display: block; /* Show toggle on mobile */
   }
+
+  .navbar-right {
+      gap: 10px; /* Reduce gap on mobile */
+  }
+
   .navbar-right img {
-    width: 20px;
+      width: 20px;
   }
-  .navbar-right button{
-    padding: 8px , 20px;
-    font-size: 15px;
+
+  .navbar-right button {
+      padding: 8px 20px;
+      font-size: 15px;
+  }
+
+  .navbar-menu.open {
+      display: flex; /* Show the menu in column on open */
   }
 }
 
-   
-  .navbar-menu li:hover {
-    color: #007bff;
-  }
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 10px;
+  cursor: pointer;
+}
 
-  
-  .navbar-right img {
-    margin-right: 15px;
-    cursor: pointer;
-  }
+.profile-popup {
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 75%; 
+  max-width: 800px; 
+  z-index: 1000;
+  text-align: center; 
+}
 
-  .profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  
-  .profile-popup {
-    position: fixed; /* Use fixed to center the popup relative to the viewport */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust position back to center */
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    width: 75%; /* Set width to 75% of the screen */
-    max-width: 800px; /* Optional max width for large screens */
-    z-index: 1000;
-    text-align: center; /* Center text and content within the popup */
-  }
-  
-  .profile-popup-image {
-    width: 100px; /* Adjust the size of the profile image */
-    height: 100px;
-    border-radius: 50%; /* Make the image circular */
-    margin: 0 auto 10px auto; /* Center the image with automatic margins */
-  }
-  
-  .profile-popup h3 {
-    margin: 0 0 10px 0;
-  }
-  
-  .profile-popup p {
-    margin: 5px 0;
-  }
-  
-  .profile-buttons {
-    display: flex; /* Use flexbox to arrange buttons in a row */
-    justify-content: center; /* Center the buttons */
-    margin: 10px 0; /* Add margin for spacing */
-  }
-  
-  .profile-button {
-    background-color: #007bff; /* Blue background for buttons */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 0 10px; /* Space between buttons */
-    transition: background-color 0.3s; /* Smooth background color transition */
-  }
-  
-  .profile-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
+.profile-popup-image {
+  width: 100px; 
+  height: 100px;
+  border-radius: 50%; 
+  margin: 0 auto 10px auto; 
+}
+
+.profile-popup h3 {
+  margin: 0 0 10px 0;
+}
+
+.profile-popup p {
+  margin: 5px 0;
+}
+
+.profile-buttons {
+  display: flex; 
+  justify-content: center; 
+  margin: 10px 0; 
+}
+
+.profile-button {
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0 10px; 
+  transition: background-color 0.3s; 
+}
+
+.profile-button:hover {
+  background-color: #0056b3; 
+}
