@@ -6,10 +6,8 @@ import "./SubmittedRequests.css"; // Import the CSS file
 const AdminPanel = () => {
   const { userProfile } = useContext(StoreContext); // Get user profile from context
   const [localCollectionList, setLocalCollectionList] = useState([]);
-  const [selectedCollectionId, setSelectedCollectionId] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [showAcceptPopup, setShowAcceptPopup] = useState(false); // State for animation popup
 
   const url = "http://localhost:4000"; // Replace with your actual backend URL
 
@@ -37,11 +35,6 @@ const AdminPanel = () => {
     fetchCollections();
   }, [userProfile, url]); // Depend on userProfile to fetch collections when it changes
 
-  // Toggle showing the details of the selected collection
-  const toggleDetails = (id) => {
-    setSelectedCollectionId((prevId) => (prevId === id ? null : id));
-  };
-
   return (
     <div className="admin-panel">
       <h2>Added Requests</h2> {/* Renamed topic */}
@@ -50,49 +43,29 @@ const AdminPanel = () => {
       <div className="collection-list-full">
         {localCollectionList && localCollectionList.length > 0 ? (
           localCollectionList.map((collection) => (
-            <div key={collection._id}>
-              <div
-                className="collection-container"
-                onClick={() => toggleDetails(collection._id)}
-              >
-                <p>
-                  <strong>ID:</strong> {collection._id}
-                </p>
-                <p>
-                  <strong>Name:</strong> {collection.name}
-                </p>
-                <p>
-                  <strong>Date:</strong>{" "}
-                  {new Date(collection.date).toLocaleDateString()}
-                </p>
-              </div>
-
-              {/* Show additional details when the item is clicked */}
-              {selectedCollectionId === collection._id && (
-                <div className="collection-details">
-                  <p>
-                    <strong>Waste Type:</strong> {collection.wasteType}
-                  </p>
-                  <p>
-                    <strong>Address:</strong> {collection.address}
-                  </p>
-                  <p>
-                    <strong>Reason:</strong> {collection.reason}
-                  </p>
-                </div>
-              )}
+            <div key={collection._id} className="collection-container">
+              <p>
+                <strong>ID:</strong> {collection._id}
+              </p>
+              <p>
+                <strong>Date:</strong>{" "}
+                {new Date(collection.date).toLocaleDateString()}
+              </p>
+              <p>
+                <strong>Waste Type:</strong> {collection.wasteType}
+              </p>
+              <p>
+                <strong>Address:</strong> {collection.address}
+              </p>
+              <p>
+                <strong>Reason:</strong> {collection.reason}
+              </p>
             </div>
           ))
         ) : (
           <p>No collection requests available.</p>
         )}
       </div>
-      {/* Popup for Accept Animation */}
-      {showAcceptPopup && (
-        <div className="accept-popup">
-          <p>Request Accepted!</p>
-        </div>
-      )}
     </div>
   );
 };
