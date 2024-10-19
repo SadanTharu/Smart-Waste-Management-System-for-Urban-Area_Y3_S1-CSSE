@@ -1,12 +1,13 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
+import axios from "axios";
 
 const clientId =
   "190098913382-cgc12ml4nme8u32kjgumdcm50nhsc28g.apps.googleusercontent.com";
 
 function Login() {
-  const onSuccess = (res) => {
-    console.log("User Logged in successfully. Current user:", res.profileObj);
+  const onSuccess = async (res) => {
+    const userProfile = res.profileObj;
   };
 
   const onFailure = (res) => {

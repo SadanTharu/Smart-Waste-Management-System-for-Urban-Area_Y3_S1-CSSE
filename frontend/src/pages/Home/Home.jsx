@@ -1,20 +1,24 @@
 import React from "react";
 import "./Home.css";
 import Header from "../../components/Header/Header";
-import ExploreDeseases from "../../components/ExploreDeseases/ExploreDeseases";
+import ExploreLocations from "../../components/ExploreLocations/ExploreLocations";
 import { useState } from "react";
 import AppDownload from "../../components/AppDownload/AppDownload";
 import LocationDisplay from "../../components/LocationDisplay/LocationDisplay";
 import CollectionRequest from "../../components/collectionRequest/collectionRequest";
+import BinRequest from '../../components/BinRequest/BinRequest';
 
 const Home = () => {
   const [category, setCategory] = useState("All");
+  const url = "http://localhost:4000"
+  
   return (
     <div>
       <Header />
-      <ExploreDeseases category={category} setCategory={setCategory} />
+      <ExploreLocations category={category} setCategory={setCategory} />
       <LocationDisplay category={category} />
       <CollectionRequest />
+      <BinRequest />
       <AppDownload />
     </div>
   );

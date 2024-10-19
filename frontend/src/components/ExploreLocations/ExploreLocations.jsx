@@ -1,10 +1,10 @@
-import React from "react";
-import "./ExploreDeseases.css";
+import React from 'react'
+import "./ExploreLocations.css";
 import { location_menu_list } from "../../assets/assets";
 
-const ExploreDeseases = ({ category, setCategory }) => {
+const ExploreLocations = ({ category, setCategory }) => {
   return (
-    <div className="explore-menu" id="diseases">
+    <div className="explore-menu" id="CollectionZone">
       <h1>View Collecting Places</h1>
       <p className="explore-menu-text">
         These are the places where we collect garbage...
@@ -34,7 +34,7 @@ const ExploreDeseases = ({ category, setCategory }) => {
       </div>
       <hr />
     </div>
-  );
-};
+  )
+}
 
-export default ExploreDeseases;
+export default ExploreLocations

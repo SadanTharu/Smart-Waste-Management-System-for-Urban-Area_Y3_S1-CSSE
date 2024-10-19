@@ -5,6 +5,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import locationRouter from './routes/locationRouter.js';
 import collectionRouter from "./routes/collectionRequestRouter.js";
+import authRoutes from "./routes/authRoutes.js";
+import garbageBinRoutes from "./routes/garbageBinRoutes.js"
 
 // App configurations
 const app = express()
@@ -28,7 +30,12 @@ connectDB();
 app.use("/api/location", locationRouter)
 app.use("/api/collection", collectionRouter)
 
+app.use("/api/auth", authRoutes);
+
 app.use("/images",express.static('uploads'))
+
+app.use('/api/garbagebin', garbageBinRoutes);
+app.use('/binUpload', express.static(path.join(__dirname, 'binUpload')));
 
 
 app.get("/", (req, res) => {
