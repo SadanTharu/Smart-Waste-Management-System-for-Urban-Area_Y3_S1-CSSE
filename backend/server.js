@@ -6,7 +6,9 @@ import { fileURLToPath } from 'url';
 import locationRouter from './routes/locationRouter.js';
 import collectionRouter from "./routes/collectionRequestRouter.js";
 import authRoutes from "./routes/authRoutes.js";
-import garbageBinRoutes from "./routes/garbageBinRoutes.js"
+import garbageBinRoutes from "./routes/garbageBinRoutes.js";
+import paymentRoutes from './routes/paymentRoutes.js';
+import binPurchaseRoutes from './routes/binPurchaseRoutes.js';
 
 // App configurations
 const app = express()
@@ -36,7 +38,8 @@ app.use("/images",express.static('uploads'))
 
 app.use('/api/garbagebin', garbageBinRoutes);
 app.use('/binUpload', express.static(path.join(__dirname, 'binUpload')));
-
+app.use('/api/payments', paymentRoutes);
+app.use('/api/binPurchases', binPurchaseRoutes);
 
 app.get("/", (req, res) => {
     res.send("API working")

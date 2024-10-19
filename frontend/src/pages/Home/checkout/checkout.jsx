@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid'; // Import uuid for generating unique IDs
+import axios from 'axios'; // For sending data to the backend
 import './checkout.css'; // Import your CSS styling
 
 const CheckoutPage = () => {
   const location = useLocation();
   const { checkoutData } = location.state || {};
+  console.log('Checkout data:', checkoutData); // Check the structure of checkoutData
+
   const [cardDetails, setCardDetails] = useState({
     cardNumber: '',
     expirationDate: '',
@@ -12,6 +16,7 @@ const CheckoutPage = () => {
   });
 
   if (!checkoutData) {
+    console.warn('No checkout data found.');
     return <p>No items selected.</p>;
   }
 
@@ -21,15 +26,60 @@ const CheckoutPage = () => {
       ...prevDetails,
       [name]: value,
     }));
+    console.log(`Card detail changed: ${name} = ${value}`);
   };
 
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
+    console.log('Payment process initiated.');
 
-    // Add validation and backend integration for card payment here
-    console.log('Payment submitted:', cardDetails);
+    // Generate unique IDs for each selected item
+    const itemsWithIds = checkoutData.selectedItems.map(item => ({
+        ...item,
+        generatedId: uuidv4(),  // Generate a unique ID for each item
+    }));
+    console.log('Items with IDs:', itemsWithIds);
 
-    alert("Payment successful!"); // You can customize this or navigate to a success page.
+    // Prepare the data to send to the backend
+    const paymentData = {
+        user: {
+            _id: checkoutData.user?.googleId,
+            name: checkoutData.user?.name,
+            email: checkoutData.user?.email,
+        },
+        items: itemsWithIds,
+        totalCost: checkoutData.totalCost,
+    };
+
+    console.log('Payment data prepared for backend:', paymentData);
+
+    try {
+        // Send the payment data to the backend to store in the database
+        const paymentResponse = await axios.post('http://localhost:4000/api/payments/process', paymentData);
+        console.log('Payment response:', paymentResponse.data);
+
+        try {
+            const binPurchaseResponse = await axios.post('http://localhost:4000/api/binPurchases/store', {
+                userId: checkoutData.user?.googleId,
+                items: itemsWithIds
+            });
+            console.log('Bin purchase response:', binPurchaseResponse.data);
+
+            if (paymentResponse.data.success && binPurchaseResponse.data.success) {
+                alert('Payment successful and data saved!');
+            } else {
+                alert('Payment or bin purchase failed. Please try again.');
+                console.error('Payment or bin purchase failed:', paymentResponse.data, binPurchaseResponse.data);
+            }
+        } catch (binPurchaseError) {
+            console.error('Error storing bin purchase:', binPurchaseError);
+            alert('An error occurred while storing bin purchase. Please try again.');
+        }
+
+    } catch (paymentError) {
+        console.error('Error processing payment:', paymentError);
+        alert('An error occurred during payment. Please try again.');
+    }
   };
 
   return (

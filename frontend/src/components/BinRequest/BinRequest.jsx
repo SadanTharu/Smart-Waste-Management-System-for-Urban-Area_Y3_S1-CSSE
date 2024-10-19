@@ -75,12 +75,18 @@ const BinRequest = ({ url }) => {
     const checkoutData = {
       selectedItems: selectedItems,
       totalCost: totalCost,
-      user: userProfile,  // Use actual user profile from StoreContext
+      user: {
+        id: userProfile.id, // Use the user ID
+        googleId: userProfile.googleId, // Include Google ID
+        name: userProfile.name, 
+        email: userProfile.email,
+    },  // Use actual user profile from StoreContext
     };
 
     // Navigate to the checkout page and pass checkout data
     navigate("/checkout", { state: { checkoutData } });
   };
+
 
   return (
     <div className="bin-request" id='BinRequest'>
