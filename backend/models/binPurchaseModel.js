@@ -21,6 +21,10 @@ const BinPurchaseSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
+    },
+    status: {
+        type: Boolean,
+        default: false,
     }
 });
 

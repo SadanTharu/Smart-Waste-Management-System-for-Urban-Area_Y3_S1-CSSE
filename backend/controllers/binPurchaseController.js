@@ -37,5 +37,55 @@ const storeBinPurchases = async (req, res) => {
     }
 };
 
+// Function to update bin status
+const updateBinStatus = async (req, res) => {
+    const { binId } = req.params; // UUID passed in the URL
+    const { status } = req.body; // Expect status to be passed in the request body
+
+    console.log('Updating bin status for bin ID:', binId); // Log the bin ID
+
+    try {
+        const updatedBin = await BinPurchaseModel.findOneAndUpdate(
+            { binId }, // Use binId to find the document
+            { status }, // Update the status
+            { new: true } // Return the updated document
+        );
+
+        if (!updatedBin) {
+            console.log('Bin not found for ID:', binId); // Log if bin not found
+            return res.status(404).json({ success: false, message: 'Bin not found' });
+        }
+
+        console.log('Bin status updated successfully:', updatedBin); // Log successful update
+        res.json({ success: true, data: updatedBin });
+    } catch (error) {
+        console.error('Error updating bin status:', error); // Log error message
+        res.status(500).json({ success: false, message: 'An error occurred while updating bin status.' });
+    }
+};
+
+const getBinPurchasesByUser = async (req, res) => {
+    const { userId } = req.params;
+
+    console.log('Fetching bin purchases for user:', userId); // Log userId
+
+    try {
+        // Find bin purchases by userId
+        const binPurchases = await BinPurchaseModel.find({ userId });
+
+        if (!binPurchases || binPurchases.length === 0) {
+            console.log('No bin purchases found for user:', userId); // Log no purchases found
+            return res.status(404).json({ success: false, message: 'No bin purchases found for this user.' });
+        }
+
+        console.log('Bin purchases found:', binPurchases); // Log the bin purchases
+
+        res.json({ success: true, binPurchases });
+    } catch (error) {
+        console.error('Error fetching bin purchases:', error); // Log error message
+        res.status(500).json({ success: false, message: 'An error occurred while fetching bin purchases.' });
+    }
+};
+
 // Export the storeBinPurchases function
-export { storeBinPurchases };
+export { storeBinPurchases, getBinPurchasesByUser, updateBinStatus  };

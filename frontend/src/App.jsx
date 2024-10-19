@@ -7,6 +7,7 @@ import Login from "./components/login";
 import Logout from "./components/logout";
 import { gapi } from "gapi-script";
 import CheckoutPage from "./pages/Home/checkout/checkout";
+import AvailableBins from './pages/AvailableBins/AvailableBins'
 
 const clientId =
   "190098913382-cgc12ml4nme8u32kjgumdcm50nhsc28g.apps.googleusercontent.com";
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/available-bins" element={<AvailableBins />} />
         </Routes>
       </div>
       <Footer />
