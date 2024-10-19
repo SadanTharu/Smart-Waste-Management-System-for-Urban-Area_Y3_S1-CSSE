@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
@@ -7,6 +8,7 @@ import locationRouter from './routes/locationRouter.js';
 import collectionRouter from "./routes/collectionRequestRouter.js";
 import authRoutes from "./routes/authRoutes.js";
 import garbageBinRoutes from "./routes/garbageBinRoutes.js"
+import paymentRoutes from './routes/paymentRoutes.js';
 
 // App configurations
 const app = express()
@@ -36,7 +38,7 @@ app.use("/images",express.static('uploads'))
 
 app.use('/api/garbagebin', garbageBinRoutes);
 app.use('/binUpload', express.static(path.join(__dirname, 'binUpload')));
-
+app.use('/api/payment', paymentRoutes);
 
 app.get("/", (req, res) => {
     res.send("API working")

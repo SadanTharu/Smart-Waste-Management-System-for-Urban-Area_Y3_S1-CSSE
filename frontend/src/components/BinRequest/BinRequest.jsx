@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements, useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import { useNavigate } from 'react-router-dom'; // For navigation
 import "./BinRequest.css";
 
-// Initialize Stripe
-const stripePromise = loadStripe('your-publishable-key-here'); // Replace with your Stripe publishable key
-
-const BinRequest = ({ url }) => {
+const BinRequest = () => {
   const [bins, setBins] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [totalCost, setTotalCost] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBins = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/garbagebin/list'); // Adjust the URL according to your backend API
+        const response = await axios.get('http://localhost:4000/api/garbagebin/list');
         if (response.data.success) {
           setBins(response.data.data);
-          
-          // Console log the binimage paths
-          response.data.data.forEach(bin => console.log(bin.binimage));
 
           const initialQuantities = response.data.data.reduce((acc, bin) => {
-            acc[bin._id] = 0; // Initialize quantity to 0 for each bin
+            acc[bin._id] = 0;
             return acc;
           }, {});
           setQuantities(initialQuantities);
@@ -49,36 +43,21 @@ const BinRequest = ({ url }) => {
   };
 
   useEffect(() => {
-    // Calculate total cost whenever quantities change
     const newTotalCost = bins.reduce((acc, bin) => {
-      return acc + (bin.price * quantities[bin._id]); // Calculate price * quantity
+      return acc + (bin.price * quantities[bin._id]);
     }, 0);
     setTotalCost(newTotalCost);
   }, [quantities, bins]);
 
-  const handleCheckout = async () => {
-    try {
-      const response = await axios.post('http://localhost:4000/api/checkout', {
-        items: bins.map((bin) => ({
-          id: bin._id,
-          quantity: quantities[bin._id],
-          price: bin.price,
-        })),
-        totalCost
-      });
-
-      const { sessionId } = response.data;
-      const stripe = await stripePromise;
-
-      // Redirect to Stripe Checkout
-      await stripe.redirectToCheckout({ sessionId });
-    } catch (error) {
-      console.error('Error during checkout:', error);
-    }
+  const handleCheckout = () => {
+    navigate.push({
+      pathname: '/payment',
+      state: { totalCost, bins, quantities },
+    });
   };
 
   return (
-    <div className="bin-request" id='BinRequest'>
+    <div className="bin-request">
       <h1>Available Garbage Bins for Purchase</h1>
       {bins.length > 0 ? (
         <ul>
@@ -86,8 +65,7 @@ const BinRequest = ({ url }) => {
             <li key={bin._id}>
               <h2>{bin.wasteType}</h2>
               <p>Capacity: {bin.capacity}L</p>
-              <img src={`http://localhost:4000/${bin.binimage}`} className='imagepromoList' alt="Garbage Bin"/>
-              
+              <img src={`http://localhost:4000/${bin.binimage}`} alt="Garbage Bin" />
               <div className="quantity-controls">
                 <button onClick={() => handleQuantityChange(bin._id, -1)}>-</button>
                 <span>{quantities[bin._id]}</span>
@@ -99,11 +77,8 @@ const BinRequest = ({ url }) => {
       ) : (
         <p>No garbage bins available for purchase at the moment.</p>
       )}
-      <h3>Total Cost: ${totalCost}</h3> {/* Display total cost */}
-
-      <button onClick={handleCheckout} className="checkout-button">
-        Proceed to Payment
-      </button> {/* Payment Button */}
+      <h3>Total Cost: ${totalCost}</h3>
+      <button onClick={handleCheckout} disabled={totalCost === 0}>Proceed to Payment</button>
     </div>
   );
 };

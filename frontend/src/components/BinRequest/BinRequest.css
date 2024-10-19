@@ -1,0 +1,26 @@
+.bin-request ul {
+    list-style-type: none;
+  }
+  
+  .bin-request li {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+  }
+  
+  .quantity-controls button {
+    background-color: #ddd;
+    padding: 5px 10px;
+  }
+  
+  .imagepromoList {
+    width: 100px;
+    height: 100px;
+  }
+  
