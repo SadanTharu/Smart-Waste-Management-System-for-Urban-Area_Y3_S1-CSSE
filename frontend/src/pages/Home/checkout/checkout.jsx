@@ -84,19 +84,29 @@ const CheckoutPage = () => {
 
   return (
     <div className="checkout-page">
-      <h1>Checkout</h1>
-
+  <h1>Checkout</h1>
+  
+  <div className="checkout-container">
+    {/* Left Side: Selected Items and User Details */}
+    <div className="left-side">
       <h2>Total Cost: ${checkoutData.totalCost}</h2>
 
       <h3>Selected Items:</h3>
       <ul>
         {checkoutData.selectedItems.map((item) => (
           <li key={item.id}>
-            {item.wasteType} - {item.capacity}L (x{item.quantity}) - ${item.price * item.quantity}
+            {item.wasteType} - {item.capacity}L (x{item.quantity}) - Rs.{item.price * item.quantity}
           </li>
         ))}
       </ul>
 
+      <h3>User Details:</h3>
+      <p><strong>Name:</strong> {checkoutData.user?.name}</p>
+      <p><strong>Email:</strong> {checkoutData.user?.email}</p>
+    </div>
+
+    {/* Right Side: Cart and Payment Form */}
+    <div className="right-side">
       <h3>Enter Card Details:</h3>
       <form onSubmit={handlePayment} className="card-details-form">
         <div className="form-group">
@@ -140,11 +150,10 @@ const CheckoutPage = () => {
 
         <button type="submit" className="payment-button">Submit Payment</button>
       </form>
-
-      <h3>User Details:</h3>
-      <p><strong>Name:</strong> {checkoutData.user?.name}</p>
-      <p><strong>Email:</strong> {checkoutData.user?.email}</p>
     </div>
+  </div>
+</div>
+
   );
 };
 

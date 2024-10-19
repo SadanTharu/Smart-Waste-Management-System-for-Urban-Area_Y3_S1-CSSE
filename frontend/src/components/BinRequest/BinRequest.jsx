@@ -103,14 +103,15 @@ const BinRequest = ({ url }) => {
                 <span>{quantities[bin._id]}</span>
                 <button onClick={() => handleQuantityChange(bin._id, 1)}>+</button>
               </div>
-              <p>Price: ${bin.price}</p>
+              <p>Price: Rs.{bin.price}</p>
             </li>
           ))}
         </ul>
       ) : (
         <p>No bins available at the moment.</p>  // Show message if no bins are available
       )}
-      <h3>Total Cost: ${totalCost}</h3>  {/* Display total cost */}
+      <h3>Total Cost: Rs.{totalCost}</h3>  {/* Display total cost */}
+      
       <button onClick={handleCheckout}>Proceed to Checkout</button>  {/* Checkout button */}
     </div>
   );
