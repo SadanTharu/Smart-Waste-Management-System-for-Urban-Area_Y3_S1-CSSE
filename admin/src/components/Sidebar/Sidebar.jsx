@@ -23,6 +23,14 @@ const Sidebar = () => {
           <img src={assets.disease_icon} alt="" />
           <p>Bins Types</p>
         </NavLink>
+        <NavLink to="/fullbins" className="sidebar-option">
+          <img src={assets.disease_icon} alt="" />
+          <p>Full bins</p>
+        </NavLink>
+        <NavLink to="/scanbins" className="sidebar-option">
+          <img src={assets.disease_icon} alt="" />
+          <p>Scan bins</p>
+        </NavLink>
       </div>
     </div>
   );

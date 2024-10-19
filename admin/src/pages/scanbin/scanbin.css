@@ -1,0 +1,47 @@
+.scan-bin {
+    max-width: 400px; /* Maximum width for the component */
+    margin: 20px auto; /* Center the component horizontally */
+    padding: 20px; /* Add padding around the component */
+    border: 1px solid #ccc; /* Light border around the component */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    background-color: #f9f9f9; /* Light background color */
+}
+
+.scan-bin h1 {
+    font-size: 24px; /* Heading font size */
+    margin-bottom: 20px; /* Space below the heading */
+    text-align: center; /* Center the heading */
+    color: #333; /* Dark text color */
+}
+
+.scan-bin input {
+    width: 100%; /* Full width of the container */
+    padding: 10px; /* Padding inside the input */
+    margin-bottom: 10px; /* Space below the input */
+    border: 1px solid #ccc; /* Light border for the input */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 16px; /* Font size for input text */
+}
+
+.scan-bin button {
+    width: 100%; /* Full width of the container */
+    padding: 10px; /* Padding inside the button */
+    background-color: #007bff; /* Primary color for button */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 16px; /* Font size for button text */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.scan-bin button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.scan-bin p {
+    margin-top: 15px; /* Space above feedback message */
+    text-align: center; /* Center the feedback message */
+    color: #d9534f; /* Red color for error messages */
+}

@@ -87,5 +87,42 @@ const getBinPurchasesByUser = async (req, res) => {
     }
 };
 
+const getFullBins = async (req, res) => {
+    try {
+        const fullBins = await BinPurchaseModel.find({ status: true }); // Find bins with status true
+
+        if (!fullBins || fullBins.length === 0) {
+            return res.status(404).json({ success: false, message: 'No full bins found.' });
+        }
+
+        res.json({ success: true, fullBins });
+    } catch (error) {
+        console.error('Error fetching full bins:', error);
+        res.status(500).json({ success: false, message: 'An error occurred while fetching full bins.' });
+    }
+};
+
+const setBinStatusToFalse = async (req, res) => {
+    const { binId } = req.params; // Get bin ID from URL params
+    const { status } = req.body; // Get status from request body (should be false)
+
+    try {
+        const updatedBin = await BinPurchaseModel.findOneAndUpdate(
+            { binId }, // Search for the bin by binId
+            { status: false }, // Update status to false
+            { new: true } // Return the updated document
+        );
+
+        if (!updatedBin) {
+            return res.status(404).json({ success: false, message: 'Bin not found.' });
+        }
+
+        res.json({ success: true, message: 'Bin status updated to false successfully.' });
+    } catch (error) {
+        console.error('Error updating bin status:', error);
+        res.status(500).json({ success: false, message: 'An error occurred while updating bin status.' });
+    }
+};
+
 // Export the storeBinPurchases function
-export { storeBinPurchases, getBinPurchasesByUser, updateBinStatus  };
+export { storeBinPurchases, getBinPurchasesByUser, updateBinStatus, getFullBins, setBinStatusToFalse };

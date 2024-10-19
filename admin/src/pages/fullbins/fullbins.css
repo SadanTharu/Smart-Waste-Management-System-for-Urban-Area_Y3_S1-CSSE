@@ -1,0 +1,49 @@
+.full-bins {
+    max-width: 600px; /* Maximum width for the component */
+    margin: 20px auto; /* Center the component horizontally */
+    padding: 20px; /* Add padding around the component */
+    border: 1px solid #ccc; /* Light border around the component */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    background-color: #f9f9f9; /* Light background color */
+}
+
+.full-bins h1 {
+    font-size: 24px; /* Heading font size */
+    margin-bottom: 20px; /* Space below the heading */
+    text-align: center; /* Center the heading */
+    color: #333; /* Dark text color */
+}
+
+.full-bins p {
+    font-size: 18px; /* Font size for paragraph text */
+    color: #666; /* Medium text color for general information */
+}
+
+.full-bins ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+.full-bins li {
+    background-color: #fff; /* White background for each bin item */
+    border: 1px solid #ccc; /* Light border for each bin item */
+    border-radius: 4px; /* Slightly rounded corners for items */
+    padding: 15px; /* Padding inside each bin item */
+    margin-bottom: 10px; /* Space below each bin item */
+    transition: box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+.full-bins li:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Slight shadow on hover */
+}
+
+.full-bins h2 {
+    font-size: 20px; /* Font size for bin ID */
+    color: #007bff; /* Primary color for the bin ID */
+    margin: 0; /* Remove margin */
+}
+
+.full-bins h2, .full-bins p {
+    margin-bottom: 5px; /* Space below heading and paragraphs */
+}
