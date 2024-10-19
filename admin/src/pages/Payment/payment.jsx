@@ -3,15 +3,15 @@ import axios from 'axios';
 import './payment.css';
 
 const AdminBankDetails = () => {
+  // State variables
   const [bankDetails, setBankDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('bank');
   const [showVerified, setShowVerified] = useState(false);
   const [notification, setNotification] = useState('');
 
+  // Fetch bank details from API
   useEffect(() => {
     const fetchBankDetails = async () => {
       try {
@@ -27,50 +27,65 @@ const AdminBankDetails = () => {
     fetchBankDetails();
   }, []);
 
+  // Handle verification of bank details
   const handleVerify = async (id) => {
     try {
       await axios.post('http://localhost:4000/api/bankDetails/verify', { id });
-      setBankDetails(bankDetails.map(detail => 
-        detail._id === id ? { ...detail, verified: true } : detail
-      ));
-      setNotification('Bank detail verified successfully!');
-      setTimeout(() => setNotification(''), 3000);
+      setBankDetails((prevDetails) =>
+        prevDetails.map((detail) => 
+          detail._id === id ? { ...detail, verified: true } : detail
+        )
+      );
+      showNotification('Bank detail verified successfully!');
     } catch (error) {
       console.error('Error verifying bank detail:', error);
-      setNotification('Error verifying bank detail.');
-      setTimeout(() => setNotification(''), 3000);
+      showNotification('Error verifying bank detail.');
     }
   };
 
+  // Show notification message
+  const showNotification = (message) => {
+    setNotification(message);
+    setTimeout(() => setNotification(''), 3000);
+  };
+
+  // Filter bank details based on search query and selected filters
   const filteredDetails = bankDetails.filter((detail) => {
     const matchesSearch = detail.residentName.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesDate =
-      (!startDate || new Date(detail.date).toLocaleDateString() >= new Date(startDate)) &&
-      (!endDate || new Date(detail.date).toLocaleDateString() <= new Date(endDate));
     const matchesPaymentMethod = detail.paymentMethod === paymentMethod;
     const matchesVerifiedStatus = showVerified ? detail.verified : !detail.verified;
 
-    return matchesSearch && matchesDate && matchesPaymentMethod && matchesVerifiedStatus;
+    return matchesSearch && matchesPaymentMethod && matchesVerifiedStatus;
   });
 
+  // Render loading state
   if (loading) {
     return <p>Loading...</p>;
   }
 
   return (
     <div className="admin-bankdetails-container">
-      <h2 className="admin-bankdetails-header">Admin View - Bank Details</h2>
+      <h2 className="admin-bankdetails-header">Verify Payments</h2>
 
       {notification && <div className="admin-bankdetails-notification">{notification}</div>}
 
       <div className="admin-bankdetails-buttons">
-        <button className={`admin-bankdetails-btn ${paymentMethod === 'bank' ? 'active' : ''}`} onClick={() => setPaymentMethod('bank')}>
+        <button
+          className={`admin-bankdetails-btn ${paymentMethod === 'bank' ? 'active' : ''}`}
+          onClick={() => setPaymentMethod('bank')}
+        >
           Bank Transfers
         </button>
-        <button className={`admin-bankdetails-btn ${paymentMethod === 'card' ? 'active' : ''}`} onClick={() => setPaymentMethod('card')}>
+        <button
+          className={`admin-bankdetails-btn ${paymentMethod === 'card' ? 'active' : ''}`}
+          onClick={() => setPaymentMethod('card')}
+        >
           Card Payments
         </button>
-        <button className={`admin-bankdetails-btn ${showVerified ? 'active' : ''}`} onClick={() => setShowVerified(!showVerified)}>
+        <button
+          className={`admin-bankdetails-btn ${showVerified ? 'active' : ''}`}
+          onClick={() => setShowVerified((prev) => !prev)}
+        >
           {showVerified ? 'Show Unverified' : 'Show Verified'}
         </button>
       </div>
@@ -82,17 +97,6 @@ const AdminBankDetails = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
         className="admin-bankdetails-search-input"
       />
-
-      <div className="admin-bankdetails-filter-container">
-        <div className="admin-bankdetails-date-filter">
-          <label>Start Date:</label>
-          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="admin-bankdetails-date-input" />
-        </div>
-        <div className="admin-bankdetails-date-filter">
-          <label>End Date:</label>
-          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="admin-bankdetails-date-input" />
-        </div>
-      </div>
 
       <table className="admin-bankdetails-table">
         <thead>
@@ -126,7 +130,12 @@ const AdminBankDetails = () => {
                 </td>
                 <td>
                   {!detail.verified ? (
-                    <button className="admin-bankdetails-verify-button" onClick={() => handleVerify(detail._id)}>Verify</button>
+                    <button
+                      className="admin-bankdetails-verify-button"
+                      onClick={() => handleVerify(detail._id)}
+                    >
+                      Verify
+                    </button>
                   ) : (
                     'Verified'
                   )}

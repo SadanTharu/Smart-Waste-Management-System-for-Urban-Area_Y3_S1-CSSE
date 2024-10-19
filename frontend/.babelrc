@@ -1,0 +1,3 @@
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"] // Include React if you're using JSX
+}

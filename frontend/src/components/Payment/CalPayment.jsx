@@ -9,29 +9,32 @@ const CalPayment = () => {
     const navigate = useNavigate();
 
     const handleWeightChange = (e) => {
-        setWeight(e.target.value);
+        const value = e.target.value;
+        setWeight(value);
     };
 
-    const handleWeightBasedClick = () => {
-        setPaymentOption('weightBased');
-        setTotalAmount(0); // Reset total amount for weight-based option
-    };
-
-    const handleFlatBasedClick = () => {
-        setPaymentOption('flatBased');
-        setTotalAmount(5000); // Automatically set flat payment for the month
+    const handlePaymentOptionClick = (option) => {
+        setPaymentOption(option);
+        setTotalAmount(option === 'flatBased' ? 5000 : 0); // Automatically set flat payment for the month or reset
     };
 
     const calculatePayment = () => {
         if (paymentOption === 'weightBased') {
-            const calculatedAmount = weight * 300; // 300 rupees per kg
-            setTotalAmount(calculatedAmount);
+            const parsedWeight = parseFloat(weight); // Parse weight to number
+            if (parsedWeight >= 0) {
+                setTotalAmount(parsedWeight * 300); // 300 rupees per kg
+            } else {
+                alert("Please enter a valid weight");
+            }
         }
     };
 
     const handleProceed = () => {
-        // Navigate to the BankDetails page and pass the total amount
-        navigate('/payment', { state: { amount: totalAmount } });
+        if (totalAmount > 0) {
+            navigate('/pay', { state: { amount: totalAmount } });
+        } else {
+            alert("Please calculate the total amount before proceeding.");
+        }
     };
 
     return (
@@ -39,10 +42,16 @@ const CalPayment = () => {
             <h2 className="payment-title">Select Payment Option</h2>
 
             <div className="payment-option-buttons">
-                <button className="btn-weight-based" onClick={handleWeightBasedClick}>
+                <button 
+                    className="btn-weight-based" 
+                    onClick={() => handlePaymentOptionClick('weightBased')}
+                >
                     Weight-based
                 </button>
-                <button className="btn-flat-based" onClick={handleFlatBasedClick}>
+                <button 
+                    className="btn-flat-based" 
+                    onClick={() => handlePaymentOptionClick('flatBased')}
+                >
                     Flat-based
                 </button>
             </div>

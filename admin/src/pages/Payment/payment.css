@@ -1,91 +1,103 @@
+/* Main container for admin bank details */
 .admin-bankdetails-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-  }
-  
-  .admin-bankdetails-header {
-    color: #FF8C00; /* Dark orange color */
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .admin-bankdetails-notification {
-    background-color: #FFD700; /* Gold color */
-    color: #000;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
-  
-  .admin-bankdetails-buttons {
-    margin-bottom: 15px;
-  }
-  
-  .admin-bankdetails-btn {
-    background-color: #FFA500; /* Orange */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .admin-bankdetails-btn.active {
-    background-color: #FF4500; /* Red-Orange */
-  }
-  
-  .admin-bankdetails-search-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
-  
-  .admin-bankdetails-filter-container {
-    margin-bottom: 15px;
-  }
-  
-  .admin-bankdetails-date-filter {
-    display: inline-block;
-    margin-right: 15px;
-  }
-  
-  .admin-bankdetails-date-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .admin-bankdetails-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .admin-bankdetails-table th, .admin-bankdetails-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .admin-bankdetails-table th {
-    background-color: #FFA500; /* Orange */
-    color: white;
-  }
-  
-  .admin-bankdetails-receipt {
-    width: 100px;
-    height: auto;
-  }
-  
-  .admin-bankdetails-verify-button {
-    background-color: #32CD32; /* Lime Green */
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+  max-width: 1000px; 
+  margin: 50px auto; 
+  padding: 20px; 
+  background-color: #ffffff; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+}
+
+/* Header styling */
+.admin-bankdetails-header {
+  color: #FF8C00; 
+  font-size: 28px; 
+  margin-bottom: 20px; 
+  text-align: center; 
+}
+
+/* Notification styling */
+.admin-bankdetails-notification {
+  background-color: #FFD700; 
+  color: #000; 
+  padding: 12px; 
+  margin-bottom: 20px; 
+  border-radius: 5px; 
+  text-align: center; 
+}
+
+/* Button group styling */
+.admin-bankdetails-buttons {
+  margin-bottom: 15px; 
+  display: flex; 
+  justify-content: center; 
+}
+
+/* Button styling */
+.admin-bankdetails-btn {
+  background-color: #FFA500; 
+  color: white; 
+  border: none; 
+  padding: 10px 15px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  margin: 0 5px; 
+  transition: background-color 0.3s; 
+}
+
+/* Active button styling */
+.admin-bankdetails-btn.active {
+  background-color: #FF4500; 
+}
+
+/* Search input styling */
+.admin-bankdetails-search-input {
+  width: 100%; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  margin-bottom: 15px; 
+}
+
+/* Table styling */
+.admin-bankdetails-table {
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+/* Table header styling */
+.admin-bankdetails-table th {
+  background-color: #FFA500; 
+  color: white; 
+  padding: 12px; 
+  text-align: left; 
+}
+
+/* Table cell styling */
+.admin-bankdetails-table th,
+.admin-bankdetails-table td {
+  border: 1px solid #ccc; 
+  padding: 10px; 
+}
+
+/* Receipt image styling */
+.admin-bankdetails-receipt {
+  width: 100px; 
+  height: auto; 
+}
+
+/* Verify button styling */
+.admin-bankdetails-verify-button {
+  background-color: #32CD32; 
+  color: white; 
+  border: none; 
+  padding: 5px 10px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+
+/* Verify button hover effect */
+.admin-bankdetails-verify-button:hover {
+  background-color: #28a745; 
+}
