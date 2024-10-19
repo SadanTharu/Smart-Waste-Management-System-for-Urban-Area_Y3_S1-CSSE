@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import "./GarbageBins.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
@@ -45,6 +45,26 @@ const GarbageBins = ({ url }) => {
         toast.error("Error submitting data");
         }
     };
+
+  const [list, setList] = useState([]);
+  const navigate = useNavigate();
+
+  const fetchList = async () => {
+    try {
+      const response = await axios.get(`${url}/api/garbagebin/list`);
+      if (response.data.success) {
+        setList(response.data.data);
+      } else {
+        toast.error("Error fetching data");
+      }
+    } catch (error) {
+      toast.error("Network error");
+    }
+  };
+
+  useEffect(() => {
+    fetchList();
+  }, []);
   return (
     <div className="add">
       <form className="flex-col" onSubmit={onSubmitHandler}>
@@ -110,7 +130,36 @@ const GarbageBins = ({ url }) => {
           Add Location
         </button>
       </form>
+
+      <div className="list add flex-col">
+      <p>All Garbage Bins Data</p>
+      <div className="list-table">
+        <div className="list-table-format title">
+          <b>Image</b>
+          <b>Waste Type</b>
+          <b>Capacity</b>
+          <b>Price</b>
+        </div>
+        {list.length > 0 ? (
+          list.map((item, index) => (
+            <div key={index} className="list-table-format">
+              <img
+                src={`${url}/binUpload/` + item.binimage}
+                alt='image'
+              />
+              <p>{item.wasteType}</p>
+              <p>{item.capacity}</p>
+              <p>{item.price}</p>
+            </div>
+          ))
+        ) : (
+          <p>No bin data available.</p>
+        )}
+      </div>
     </div>
+    </div>
+
+    
   )
 }
 
