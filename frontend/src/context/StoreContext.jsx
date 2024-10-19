@@ -60,6 +60,8 @@ const StoreContextProvider = (props) => {
       });
     }
     gapi.load("client:auth2", start);
+    fetchLocationList();
+    fetchCollectionList();
   }, []);
 
   // Context value
